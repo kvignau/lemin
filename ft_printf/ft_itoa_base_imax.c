@@ -32,24 +32,6 @@ static size_t		ft_nbrlen_imax(intmax_t n, size_t base)
 	return (i);
 }
 
-static void			ft_base_imax(size_t len, char **str, size_t base,
-		intmax_t nb)
-{
-	while (nb != 0)
-	{
-		len--;
-		if (base >= 10 && nb % base >= 10)
-		{
-			(*str)[len] = (nb % base) + 87;
-		}
-		else
-		{
-			(*str)[len] = (nb % base) + 48;
-		}
-		nb = nb / base;
-	}
-}
-
 char				*ft_itoa_base_imax(intmax_t n, size_t base)
 {
 	char			*str;
@@ -66,10 +48,17 @@ char				*ft_itoa_base_imax(intmax_t n, size_t base)
 	}
 	str[len] = '\0';
 	if (n == 0)
-		str[--len] = '0';
+		str[0] = '0';
 	else
 	{
-		ft_base_imax(len, &str, base, n);
+		while (n != 0)
+		{
+			if (base > 10 && n % base > 9)
+				str[--len] = (n % base) + ('a' - 10);
+			else
+				str[--len] = (n % base) + 48;
+			n = n / base;
+		}
 	}
 	return (str);
 }
