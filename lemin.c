@@ -12,15 +12,50 @@
 
 #include "lemin.h"
 
-void		parsing_fourmiliere()
+int			iscomment(char *line)
 {
+	if (line[0] == '#' && line[1] != '#')
+	{
+		ft_printf("\n%s\n", line);//debug
+		return (1);
+	}
+	return (0);
+}
+
+int			nbfourmis(char *line, int *nb_fourmis)
+{
+	int		i;
+
+	i = 0;
+	while (line && line[i])
+	{
+		if (!ft_isdigit(line[i]))
+			return (0);
+		i++;
+	}
+	*nb_fourmis = ft_atoi(line);
+	return (1);
+}
+
+int			parsing_fourmiliere()
+{
+	int		nb_fourmis;
 	char	*line;
 
+	nb_fourmis = -1;
 	while (get_next_line(0, &line))
 	{
-		ft_printf("%s\n", line);
-		free(line);
+		if (!iscomment(line))
+		{
+			if (nb_fourmis < 0)
+			{
+				if (!nbfourmis(line, &nb_fourmis))
+					return (0);
+				ft_printf("\n%d\n", nb_fourmis);//debug
+			}
+		}
 	}
+	return (1);
 }
 
 int			main(void)
