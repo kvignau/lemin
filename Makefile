@@ -14,7 +14,7 @@ NAME = lem_in
 
 FLAGS = -Wall -Wextra -Werror
 
-SRC = lemin.c
+SRC = lemin.c action_lst.c
 
 OBJ = $(SRC:%.c=%.o)
 

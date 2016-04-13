@@ -14,10 +14,14 @@
 # define LEMIN_H
 
 # include "ft_printf/ft_printf.h"
+# define LSTROOMS (*env)->rooms
+# define HROOMS (*env)->rooms->head
+# define TROOMS (*env)->rooms->tail
+# define NBROOMS (*env)->rooms->nb_rooms
 
 typedef struct		s_rooms
 {
-	char			*room;
+	char			*name_room;
 	int				x;
 	int				y;
 	struct s_rooms	*prev;
@@ -36,6 +40,18 @@ typedef struct		s_fourmiliere
 	int				nb_fourmis;
 	t_lstrooms		*rooms;
 	//rajouter liste des tubes
-}					s_fourmiliere;
+}					t_fourmiliere;
+
+//action liste, structure
+void				initlstrooms(t_fourmiliere **env);
+void				initenv(t_fourmiliere **env);
+void				ft_newroom(t_rooms **room, char *name, int x, int y);
+void				ft_addroomfront(t_fourmiliere **env, t_rooms *new_elem);
+void				ft_delrooms(t_fourmiliere **env);
+
+//fonction lemin.c
+int					iscomment(char *line);
+int					nbfourmis(char *line, t_fourmiliere **env);
+int					parsing_fourmiliere(t_fourmiliere **env);
 
 #endif

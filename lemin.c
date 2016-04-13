@@ -12,35 +12,17 @@
 
 #include "lemin.h"
 
-// void		ft_initdbl(t_rooms **lst)
-// {
-// 	*lst = (t_dbl *)malloc(sizeof(t_dbl));
-// 	if (*lst == NULL)
-// 		return ;
-// 	else
-// 	{
-// 		(*lst)->length = 0;
-// 		(*lst)->tail = NULL;
-// 		(*lst)->head = NULL;
-// 	}
-// }
+int			iscomment(char *line)
+{
+	if (line[0] == '#' && line[1] != '#')
+	{
+		ft_printf("\n%s\n", line);//debug
+		return (1);
+	}
+	return (0);
+}
 
-// void		initenv(t_fourmiliere **env)
-// {
-// 	ft_initdbl(env->rooms);
-// }
-
-// int			iscomment(char *line)
-// {
-// 	if (line[0] == '#' && line[1] != '#')
-// 	{
-// 		ft_printf("\n%s\n", line);//debug
-// 		return (1);
-// 	}
-// 	return (0);
-// }
-
-int			nbfourmis(char *line, int *nb_fourmis)
+int			nbfourmis(char *line, t_fourmiliere **env)
 {
 	int		i;
 
@@ -51,25 +33,23 @@ int			nbfourmis(char *line, int *nb_fourmis)
 			return (0);
 		i++;
 	}
-	*nb_fourmis = ft_atoi(line);
+	(*env)->nb_fourmis = ft_atoi(line);
 	return (1);
 }
 
-int			parsing_fourmiliere()
+int			parsing_fourmiliere(t_fourmiliere **env)
 {
-	int		nb_fourmis;
 	char	*line;
 
-	nb_fourmis = -1;
 	while (get_next_line(0, &line))
 	{
 		if (!iscomment(line))
 		{
-			if (nb_fourmis < 0)
+			if ((*env)->nb_fourmis < 0)
 			{
-				if (!nbfourmis(line, &nb_fourmis))
+				if (!nbfourmis(line, env))
 					return (0);
-				ft_printf("\n%d\n", nb_fourmis);//debug
+				ft_printf("\n%d\n", (*env)->nb_fourmis);//debug
 			}
 		}
 	}
@@ -78,6 +58,22 @@ int			parsing_fourmiliere()
 
 int			main(void)
 {
-	parsing_fourmiliere();//si parsing != 0 display all file
+	t_fourmiliere	*env;
+	t_rooms			*room;//test fonction creation room
+
+	initenv(&env);
+
+	ft_newroom(&room, "room 1", 5, 6);//test fonction creation room
+	ft_addroomfront(&env, room);//test fonction add front
+	ft_newroom(&room, "room 2", 4, 1);//test fonction creation room
+	ft_addroomfront(&env, room);//test fonction add front
+	ft_delrooms(&env);//test supp
+	while (env->rooms->head)
+	{
+		ft_printf("\nnom de la room : %s, x: %d, y: %d\n", env->rooms->head->name_room, env->rooms->head->x, env->rooms->head->y);
+		env->rooms->head = env->rooms->head->next;
+	}
+
+	parsing_fourmiliere(&env);//si parsing != 0 display all file
 	return (0);
 }
