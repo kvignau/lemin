@@ -12,15 +12,33 @@
 
 #include "lemin.h"
 
-int			iscomment(char *line)
-{
-	if (line[0] == '#' && line[1] != '#')
-	{
-		ft_printf("\n%s\n", line);//debug
-		return (1);
-	}
-	return (0);
-}
+// void		ft_initdbl(t_rooms **lst)
+// {
+// 	*lst = (t_dbl *)malloc(sizeof(t_dbl));
+// 	if (*lst == NULL)
+// 		return ;
+// 	else
+// 	{
+// 		(*lst)->length = 0;
+// 		(*lst)->tail = NULL;
+// 		(*lst)->head = NULL;
+// 	}
+// }
+
+// void		initenv(t_fourmiliere **env)
+// {
+// 	ft_initdbl(env->rooms);
+// }
+
+// int			iscomment(char *line)
+// {
+// 	if (line[0] == '#' && line[1] != '#')
+// 	{
+// 		ft_printf("\n%s\n", line);//debug
+// 		return (1);
+// 	}
+// 	return (0);
+// }
 
 int			nbfourmis(char *line, int *nb_fourmis)
 {
@@ -60,6 +78,6 @@ int			parsing_fourmiliere()
 
 int			main(void)
 {
-	parsing_fourmiliere();
+	parsing_fourmiliere();//si parsing != 0 display all file
 	return (0);
 }
