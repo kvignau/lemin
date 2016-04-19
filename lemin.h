@@ -54,7 +54,8 @@ void				ft_delrooms(t_fourmiliere **env);
 //fonction lemin.c
 int					iscomment(char *line);
 int					nbfourmis(char *line, t_fourmiliere **env);
-void				ft_room(t_fourmiliere **env, char *line, int *end, int *start);
+int					test_room(char *line);
+int					ft_room(t_fourmiliere **env, char *line, int *end, int *start);
 int					parsing_fourmiliere(t_fourmiliere **env);
 
 #endif

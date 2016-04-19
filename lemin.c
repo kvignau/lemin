@@ -37,10 +37,35 @@ int			nbfourmis(char *line, t_fourmiliere **env)
 	return (1);
 }
 
-void		ft_room(t_fourmiliere **env, char *line, int *end, int *start)
+int					test_room(char *line)
+{
+	int				i;
+	int				space;
+
+	i = 0;
+	space = 0;
+	ft_printf("\ntest room  %s\n", line);
+	while (line && line[i])
+	{
+		if (line[i] == ' ')
+			space++;
+		else if (space != 0 && !ft_isdigit(line[i]))
+		{
+			ft_putchar(line[i]);
+			return (-1);
+		}
+		i++;
+	}
+	if (space == 2)
+		return (1);
+	return (0);
+}
+
+int			ft_room(t_fourmiliere **env, char *line, int *end, int *start)
 {
 	char	**recup;
 	t_rooms	*room;
+	int		ok;
 
 	if (line[0] == '#' && line[1] == '#')
 	{
@@ -48,23 +73,24 @@ void		ft_room(t_fourmiliere **env, char *line, int *end, int *start)
 			*start = 1;
 		if (ft_strequ("end", line + 2))
 			*end = 1;
-		else
-			ft_printf("\nError\n");//debug ajout fonction error()
 	}
 	else
 	{
 		recup = ft_strsplit(line, ' ');
-		if (recup[3])
-			ft_printf("\nError trop de param dans ligne\n");//debug ajout fonction error()
+		ok = test_room(line);
+		ft_printf("\n retour testroom %d\n", ok);
+		if (ok != 1)
+			return (ok);//error();
 		ft_newroom(&room, recup[0], ft_atoi(recup[1]), ft_atoi(recup[2]));
-		//if (*start)
-		//room->start = 1;
-		//*start = 0;
-		//if (end)
-		//room->end = 1;
-		//*end = 0;
+		if (*start)
+			room->start = 1;
+		*start = 0;
+		if (end)
+			room->end = 1;
+		*end = 0;
 		ft_addroomfront(env, room);
 	}
+	return (1);
 }
 
 int			parsing_fourmiliere(t_fourmiliere **env)
@@ -87,7 +113,7 @@ int			parsing_fourmiliere(t_fourmiliere **env)
 			}
 			else
 			{
-				ft_room(env, line, &end, &start);
+				ft_room(env, line, &end, &start);//error si -1
 			}
 		}
 	}
@@ -106,13 +132,15 @@ int			main(void)
 	// ft_newroom(&room, "room 2", 4, 1);//test fonction creation room
 	// ft_addroomfront(&env, room);//test fonction add front
 	// ft_delrooms(&env);//test supp
+
+	if (!parsing_fourmiliere(&env))//si parsing != 0 display all file
+		exit (0);//error 
+	ft_putstr("\nje suis la\n");
 	while (env->rooms->head)
 	{
 		ft_printf("\nnom de la room : %s, x: %d, y: %d\n", env->rooms->head->name_room, env->rooms->head->x, env->rooms->head->y);
 		env->rooms->head = env->rooms->head->next;
 	}
 
-	if (!parsing_fourmiliere(&env))//si parsing != 0 display all file
-		exit (0);//error 
 	return (0);
 }
