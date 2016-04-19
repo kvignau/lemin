@@ -44,16 +44,12 @@ int					test_room(char *line)
 
 	i = 0;
 	space = 0;
-	ft_printf("\ntest room  %s\n", line);
 	while (line && line[i])
 	{
 		if (line[i] == ' ')
 			space++;
 		else if (space != 0 && !ft_isdigit(line[i]))
-		{
-			ft_putchar(line[i]);
 			return (-1);
-		}
 		i++;
 	}
 	if (space == 2)
@@ -71,22 +67,23 @@ int			ft_room(t_fourmiliere **env, char *line, int *end, int *start)
 	{
 		if (ft_strequ("start", line + 2))
 			*start = 1;
-		if (ft_strequ("end", line + 2))
+		else if (ft_strequ("end", line + 2))
 			*end = 1;
+		else
+			return (-1);
 	}
 	else
 	{
 		recup = ft_strsplit(line, ' ');
 		ok = test_room(line);
-		ft_printf("\n retour testroom %d\n", ok);
 		if (ok != 1)
 			return (ok);//error();
 		ft_newroom(&room, recup[0], ft_atoi(recup[1]), ft_atoi(recup[2]));
 		if (*start)
 			room->start = 1;
-		*start = 0;
-		if (end)
+		if (*end)
 			room->end = 1;
+		*start = 0;
 		*end = 0;
 		ft_addroomfront(env, room);
 	}
@@ -111,9 +108,12 @@ int			parsing_fourmiliere(t_fourmiliere **env)
 					return (0);
 				ft_printf("\n%d\n", (*env)->nb_fourmis);//debug
 			}
+			else if (ft_room(env, line, &end, &start) == -1)
+				//error si -1
+				return (0);
 			else
 			{
-				ft_room(env, line, &end, &start);//error si -1
+				ft_tube();//fonction creation matrice
 			}
 		}
 	}
@@ -135,10 +135,9 @@ int			main(void)
 
 	if (!parsing_fourmiliere(&env))//si parsing != 0 display all file
 		exit (0);//error 
-	ft_putstr("\nje suis la\n");
 	while (env->rooms->head)
 	{
-		ft_printf("\nnom de la room : %s, x: %d, y: %d\n", env->rooms->head->name_room, env->rooms->head->x, env->rooms->head->y);
+		ft_printf("\nnom de la room : %s, x: %d, y: %d, start: %d, end: %d\n", env->rooms->head->name_room, env->rooms->head->x, env->rooms->head->y, env->rooms->head->start, env->rooms->head->end);
 		env->rooms->head = env->rooms->head->next;
 	}
 
