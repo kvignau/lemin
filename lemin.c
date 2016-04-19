@@ -48,7 +48,7 @@ int					test_room(char *line)
 	{
 		if (line[i] == ' ')
 			space++;
-		else if (space != 0 && !ft_isdigit(line[i]))
+		else if (space != 0 && !ft_isdigit(line[i]))			
 			return (-1);
 		i++;
 	}
@@ -75,6 +75,8 @@ int			ft_room(t_fourmiliere **env, char *line, int *end, int *start)
 	else
 	{
 		recup = ft_strsplit(line, ' ');
+		if (!recup[0] || !recup[1] || !recup[2])
+			return (-1);
 		ok = test_room(line);
 		if (ok != 1)
 			return (ok);//error();
@@ -111,10 +113,10 @@ int			parsing_fourmiliere(t_fourmiliere **env)
 			else if (ft_room(env, line, &end, &start) == -1)
 				//error si -1
 				return (0);
-			else
-			{
-				ft_tube();//fonction creation matrice
-			}
+			// else
+			// {
+			// 	ft_pipe();//fonction creation matrice
+			// }
 		}
 	}
 	return (1);
@@ -134,7 +136,10 @@ int			main(void)
 	// ft_delrooms(&env);//test supp
 
 	if (!parsing_fourmiliere(&env))//si parsing != 0 display all file
-		exit (0);//error 
+	{
+		ft_printf("\nError\n");
+		exit (0);//error
+	} 
 	while (env->rooms->head)
 	{
 		ft_printf("\nnom de la room : %s, x: %d, y: %d, start: %d, end: %d\n", env->rooms->head->name_room, env->rooms->head->x, env->rooms->head->y, env->rooms->head->start, env->rooms->head->end);
