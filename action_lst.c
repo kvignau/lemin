@@ -39,6 +39,8 @@ void		ft_newroom(t_rooms **room, char *name, int x, int y)
 	(*room)->name_room = name;
 	(*room)->x = x;
 	(*room)->y = y;
+	(*room)->start = 0;
+	(*room)->end = 0;
 	(*room)->prev = NULL;
 	(*room)->next = NULL;
 }

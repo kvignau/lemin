@@ -24,6 +24,8 @@ typedef struct		s_rooms
 	char			*name_room;
 	int				x;
 	int				y;
+	int				start;
+	int				end;
 	struct s_rooms	*prev;
 	struct s_rooms	*next;
 }					t_rooms;
@@ -52,6 +54,7 @@ void				ft_delrooms(t_fourmiliere **env);
 //fonction lemin.c
 int					iscomment(char *line);
 int					nbfourmis(char *line, t_fourmiliere **env);
+void				ft_room(t_fourmiliere **env, char *line, int *end, int *start);
 int					parsing_fourmiliere(t_fourmiliere **env);
 
 #endif
