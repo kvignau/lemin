@@ -57,8 +57,9 @@ void				ft_delrooms(t_fourmiliere **env);
 int					iscomment(char *line);
 int					nbfourmis(char *line, t_fourmiliere **env);
 int					test_room(char *line);
-void				ft_pipe(t_fourmiliere **env);
+void				ft_initpipe(t_fourmiliere **env);
 int					ft_room(t_fourmiliere **env, char *line, int *end, int *start);
 int					parsing_fourmiliere(t_fourmiliere **env);
-
+int					ft_pipe(t_fourmiliere **env, char *line);
+int					start_end(t_fourmiliere *env);
 #endif
