@@ -85,11 +85,26 @@ int			ft_room(t_fourmiliere **env, char *line, int *end, int *start)
 			room->start = 1;
 		if (*end)
 			room->end = 1;
+		room->id = NBROOMS;
 		*start = 0;
 		*end = 0;
 		ft_addroomfront(env, room);
 	}
 	return (1);
+}
+
+int			ft_pipe(t_fourmiliere **env)
+{
+	int		i;
+
+	i = 0;
+	(*env)->tubes = (int **)malloc(sizeof(int *) * NBROOMS);
+	while (i < NBROOMS)
+	{
+		(*env)->tubes[i] = (int *)malloc(sizeof(int) * NBROOMS);
+		ft_bzero((*env)->tubes[i]);
+		i++;
+	}
 }
 
 int			parsing_fourmiliere(t_fourmiliere **env)
@@ -113,10 +128,10 @@ int			parsing_fourmiliere(t_fourmiliere **env)
 			else if (ft_room(env, line, &end, &start) == -1)
 				//error si -1
 				return (0);
-			// else
-			// {
-			// 	ft_pipe();//fonction creation matrice
-			// }
+			else
+			{
+				ft_pipe();//fonction creation matrice
+			}
 		}
 	}
 	return (1);

@@ -26,6 +26,7 @@ typedef struct		s_rooms
 	int				y;
 	int				start;
 	int				end;
+	int				id;
 	struct s_rooms	*prev;
 	struct s_rooms	*next;
 }					t_rooms;
@@ -42,6 +43,7 @@ typedef struct		s_fourmiliere
 	int				nb_fourmis;
 	t_lstrooms		*rooms;
 	//rajouter liste des tubes
+	int				**tubes;
 }					t_fourmiliere;
 
 //action liste, structure
