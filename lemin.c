@@ -76,7 +76,7 @@ int			ft_room(t_fourmiliere **env, char *line, int *end, int *start)
 	{
 		recup = ft_strsplit(line, ' ');
 		if (!recup[0] || !recup[1] || !recup[2])
-			return (-1);
+			return (0);
 		ok = test_room(line);
 		if (ok != 1)
 			return (ok);//error();
@@ -93,16 +93,35 @@ int			ft_room(t_fourmiliere **env, char *line, int *end, int *start)
 	return (1);
 }
 
-int			ft_pipe(t_fourmiliere **env)
+void		ft_pipe(t_fourmiliere **env)
 {
 	int		i;
+	int		j;
 
 	i = 0;
 	(*env)->tubes = (int **)malloc(sizeof(int *) * NBROOMS);
 	while (i < NBROOMS)
 	{
+		j = 0;
 		(*env)->tubes[i] = (int *)malloc(sizeof(int) * NBROOMS);
-		ft_bzero((*env)->tubes[i]);
+		while (j < NBROOMS)
+		{
+			(*env)->tubes[i][j] = 0;
+			j++;
+		}
+		i++;
+	}
+	//debug
+	i = 0;
+	while (i < NBROOMS)
+	{
+		j = 0;
+		while (j < NBROOMS)
+		{
+			ft_putnbr((*env)->tubes[i][j]);
+			j++;
+		}
+		ft_printf("\n");
 		i++;
 	}
 }
@@ -112,9 +131,13 @@ int			parsing_fourmiliere(t_fourmiliere **env)
 	char	*line;
 	int		end;
 	int		start;
+	int		roomok;
+	int		ok;
 
 	end = 0;
 	start = 0;
+	roomok = 0;
+	ok = 0;
 	while (get_next_line(0, &line))
 	{
 		if (!iscomment(line))
@@ -125,12 +148,13 @@ int			parsing_fourmiliere(t_fourmiliere **env)
 					return (0);
 				ft_printf("\n%d\n", (*env)->nb_fourmis);//debug
 			}
-			else if (ft_room(env, line, &end, &start) == -1)
+			else if ((roomok = ft_room(env, line, &end, &start)) == -1)
 				//error si -1
 				return (0);
-			else
+			else if (roomok == 0 && ok == 0)
 			{
-				ft_pipe();//fonction creation matrice
+				ft_pipe(env);//fonction creation matrice
+				ok++;
 			}
 		}
 	}
