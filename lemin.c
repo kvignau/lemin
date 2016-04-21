@@ -163,9 +163,21 @@ int			ft_pipe(t_fourmiliere **env, char *line)
 	// int		i;
 	// int		j;
 	char	**recup;
+	t_rooms	*tmp;
+	int		ok;
 
+	ok = 0;
 	recup = ft_strsplit(line, '-');
 	if (!recup[0] || !recup[1])
+		return (0);
+	tmp = HROOMS;
+	while (tmp)
+	{
+		if (ft_strequ(tmp->name_room, recup[0]) || ft_strequ(tmp->name_room, recup[1]))
+			ok++;
+		tmp = tmp->next;
+	}
+	if (ok != 2)
 		return (0);
 	(*env)->tubes[ft_atoi(recup[0])][ft_atoi(recup[1])] = 1;
 	(*env)->tubes[ft_atoi(recup[1])][ft_atoi(recup[0])] = 1;
