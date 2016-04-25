@@ -28,3 +28,26 @@
 // 		return (1);
 // 	lemin(room->next);
 // }
+
+// int			lemin(t_rooms *room)
+// {
+// 	int		i;
+
+// 	i = 0;
+// 	while (matrice[room->id][i])
+// 	{
+// 		if (matrice[room->id][i] == 1)
+// 		{
+// 			y = 0;
+// 			while (y < i)
+// 			{
+// 				tmp = tmp->next;
+// 				y++;
+// 			}
+// 			if (tmp->end == 1)
+// 				return (1);
+// 			else
+// 				return (lemin(tmp));
+// 		}
+// 	}
+// }
