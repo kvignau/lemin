@@ -165,6 +165,8 @@ int			ft_pipe(t_fourmiliere **env, char *line)
 	char	**recup;
 	t_rooms	*tmp;
 	int		ok;
+	int		id_1;
+	int		id_2;
 
 	ok = 0;
 	recup = ft_strsplit(line, '-');
@@ -174,13 +176,19 @@ int			ft_pipe(t_fourmiliere **env, char *line)
 	while (tmp)
 	{
 		if (ft_strequ(tmp->name_room, recup[0]) || ft_strequ(tmp->name_room, recup[1]))
+		{
+			if (ok == 0)
+				id_1 = tmp->id;
+			if (ok == 1)
+				id_2 = tmp->id;
 			ok++;
+		}
 		tmp = tmp->next;
 	}
 	if (ok != 2)
 		return (0);
-	(*env)->tubes[ft_atoi(recup[0])][ft_atoi(recup[1])] = 1;
-	(*env)->tubes[ft_atoi(recup[1])][ft_atoi(recup[0])] = 1;
+	(*env)->tubes[id_1][id_2] = 1;
+	(*env)->tubes[id_2][id_1] = 1;
 	
 	// //debug
 	// i = 0;
@@ -255,8 +263,8 @@ int			main(void)
 	int				start;
 	int				end;
 	t_rooms			*tmp;
-	// int i;
-	// int j;
+	int i;//debug
+	int j;//debug
 
 	initenv(&env);
 
@@ -281,27 +289,29 @@ int			main(void)
 		tmp = tmp->next;
 	}
 	ft_printf("start: %d, end: %d\n", start, end);
-	lemin (start, end, env->tubes, env->rooms->nb_rooms);
+	//lemin (start, end, env->tubes, env->rooms->nb_rooms);
 
 	//debug
-	// i = 0;
-	// while (i < env->rooms->nb_rooms)
-	// {
-	// 	j = 0;
-	// 	while (j < env->rooms->nb_rooms)
-	// 	{
-	// 		ft_putnbr(env->tubes[i][j]);
-	// 		j++;
-	// 	}
-	// 	ft_printf("\n");
-	// 	i++;
-	// }
-	//lemin (env->rooms->tail, env->tubes);
-	// while (env->rooms->head)
-	// {
-	// 	ft_printf("\nid room : %d, nom de la room : %s, x: %d, y: %d, start: %d, end: %d\n", env->rooms->head->id, env->rooms->head->name_room, env->rooms->head->x, env->rooms->head->y, env->rooms->head->start, env->rooms->head->end);
-	// 	env->rooms->head = env->rooms->head->next;
-	// }
+	i = 0;
+	while (i < env->rooms->nb_rooms)
+	{
+		j = 0;
+		while (j < env->rooms->nb_rooms)
+		{
+			ft_putnbr(env->tubes[i][j]);
+			j++;
+		}
+		ft_printf("\n");
+		i++;
+	}
+
+	while (env->rooms->head)
+	{
+		ft_printf("\nid room : %d, nom de la room : %s, x: %d, y: %d, start: %d, end: %d\n", env->rooms->head->id, env->rooms->head->name_room, env->rooms->head->x, env->rooms->head->y, env->rooms->head->start, env->rooms->head->end);
+		env->rooms->head = env->rooms->head->next;
+	}
+	lemin (start, end, env->tubes, env->rooms->nb_rooms);
+	lemin (start, end, env->tubes, env->rooms->nb_rooms);
 
 	return (0);
 }

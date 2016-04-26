@@ -25,7 +25,7 @@ int			lemin(int start, int end, int **matrice, int longueur)
 			if (i == end)
 			{
 				ft_printf("coucou\n");
-				ft_printf("%d\n", i);
+				ft_printf("%d ", i);
 				return (1);
 			}
 			matrice[start][i] = 0;
@@ -34,7 +34,7 @@ int			lemin(int start, int end, int **matrice, int longueur)
 			{
 				// matrice[start][i] = 1;
 				// matrice[i][start] = 1;
-				ft_printf("%d\n", i);
+				ft_printf("%d ", i);
 				return (1);
 			}
 			matrice[start][i] = 1;
