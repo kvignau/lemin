@@ -280,6 +280,7 @@ int			main(void)
 			end = tmp->id;
 		tmp = tmp->next;
 	}
+	ft_printf("start: %d, end: %d\n", start, end);
 	lemin (start, end, env->tubes, env->rooms->nb_rooms);
 
 	//debug
