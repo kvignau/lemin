@@ -181,6 +181,7 @@ int			ft_pipe(t_fourmiliere **env, char *line)
 		return (0);
 	(*env)->tubes[ft_atoi(recup[0])][ft_atoi(recup[1])] = 1;
 	(*env)->tubes[ft_atoi(recup[1])][ft_atoi(recup[0])] = 1;
+	
 	// //debug
 	// i = 0;
 	// while (i < NBROOMS)
@@ -250,7 +251,12 @@ int			parsing_fourmiliere(t_fourmiliere **env)
 int			main(void)
 {
 	t_fourmiliere	*env;
-	t_rooms			*room;//test fonction creation room
+	// t_rooms			*room;//test fonction creation room
+	int				start;
+	int				end;
+	t_rooms			*tmp;
+	// int i;
+	// int j;
 
 	initenv(&env);
 
@@ -264,12 +270,37 @@ int			main(void)
 	{
 		ft_printf("\nError\n");
 		exit (0);//error
-	} 
-	while (env->rooms->head)
-	{
-		ft_printf("\nid room : %d, nom de la room : %s, x: %d, y: %d, start: %d, end: %d\n", env->rooms->head->id, env->rooms->head->name_room, env->rooms->head->x, env->rooms->head->y, env->rooms->head->start, env->rooms->head->end);
-		env->rooms->head = env->rooms->head->next;
 	}
+	tmp = env->rooms->head;
+	while (tmp)
+	{
+		if (tmp->start == 1)
+			start = tmp->id;
+		if (tmp->end == 1)
+			end = tmp->id;
+		tmp = tmp->next;
+	}
+	lemin (start, end, env->tubes, env->rooms->nb_rooms);
+
+	//debug
+	// i = 0;
+	// while (i < env->rooms->nb_rooms)
+	// {
+	// 	j = 0;
+	// 	while (j < env->rooms->nb_rooms)
+	// 	{
+	// 		ft_putnbr(env->tubes[i][j]);
+	// 		j++;
+	// 	}
+	// 	ft_printf("\n");
+	// 	i++;
+	// }
+	//lemin (env->rooms->tail, env->tubes);
+	// while (env->rooms->head)
+	// {
+	// 	ft_printf("\nid room : %d, nom de la room : %s, x: %d, y: %d, start: %d, end: %d\n", env->rooms->head->id, env->rooms->head->name_room, env->rooms->head->x, env->rooms->head->y, env->rooms->head->start, env->rooms->head->end);
+	// 	env->rooms->head = env->rooms->head->next;
+	// }
 
 	return (0);
 }

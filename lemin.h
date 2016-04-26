@@ -63,4 +63,7 @@ int					parsing_fourmiliere(t_fourmiliere **env);
 int					ft_pipe(t_fourmiliere **env, char *line);
 int					start_end(t_fourmiliere *env);
 
+//reso
+int					lemin(int start, int end, int **matrice, int longueur);
+
 #endif
