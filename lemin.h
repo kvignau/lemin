@@ -47,6 +47,38 @@ typedef struct		s_fourmiliere
 	int				**tubes;
 }					t_fourmiliere;
 
+
+//liste de liste de chemin
+typedef struct		s_chemin
+{
+	int				id;
+	// int				visite;
+	struct s_chemin	*prev;
+	struct s_chemin	*next;
+}					t_chemin;
+
+typedef struct		s_lstchemin
+{
+	size_t			nb_chemin;
+	t_chemin		*head;
+	t_chemin		*tail;
+}					t_lstchemin;
+
+typedef struct			s_listech
+{
+	t_lstchemin			list_id;
+	// int				visite;
+	struct s_listech	*prev;
+	struct s_listech	*next;
+}						t_listech;
+
+typedef struct		s_alllstch
+{
+	size_t			nb_listechemin;
+	t_listech		*head;
+	t_listech		*tail;
+}					t_alllstch;
+
 //action liste, structure
 void				initlstrooms(t_fourmiliere **env);
 void				initenv(t_fourmiliere **env);
@@ -65,6 +97,6 @@ int					ft_pipe(t_fourmiliere **env, char *line);
 int					start_end(t_fourmiliere *env);
 
 //reso
-void				lemin(int start, int end, int **matrice, int longueur);
+int				lemin(int start, int end, int **matrice, int longueur);
 
 #endif
