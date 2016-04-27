@@ -28,7 +28,7 @@ char						*ft_itoa(int n)
 		return (NULL);
 	if (n < 0)
 		str[i++] = '-';
-	itoa = ft_itoa_base_ll(n, 10);
+	itoa = ft_itoa_base(n, 10);
 	while (itoa[j] != '\0')
 	{
 		str[i + j] = itoa[j];

@@ -27,6 +27,7 @@ typedef struct		s_rooms
 	int				start;
 	int				end;
 	int				id;
+	// int				visite;
 	struct s_rooms	*prev;
 	struct s_rooms	*next;
 }					t_rooms;
@@ -64,6 +65,6 @@ int					ft_pipe(t_fourmiliere **env, char *line);
 int					start_end(t_fourmiliere *env);
 
 //reso
-int					lemin(int start, int end, int **matrice, int longueur);
+void				lemin(int start, int end, int **matrice, int longueur);
 
 #endif

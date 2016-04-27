@@ -92,7 +92,10 @@ int			ft_room(t_fourmiliere **env, char *line, int *end, int *start)
 		}
 		ft_newroom(&room, recup[0], ft_atoi(recup[1]), ft_atoi(recup[2]));
 		if (*start)
+		{
 			room->start = 1;
+			// room->visite = 1;
+		}
 		if (*end)
 			room->end = 1;
 		room->id = NBROOMS;
@@ -311,7 +314,7 @@ int			main(void)
 		env->rooms->head = env->rooms->head->next;
 	}
 	lemin (start, end, env->tubes, env->rooms->nb_rooms);
-	lemin (start, end, env->tubes, env->rooms->nb_rooms);
+	// lemin (start, end, env->tubes, env->rooms->nb_rooms);
 
 	return (0);
 }

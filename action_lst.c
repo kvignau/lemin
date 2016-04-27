@@ -42,6 +42,7 @@ void		ft_newroom(t_rooms **room, char *name, int x, int y)
 	(*room)->start = 0;
 	(*room)->end = 0;
 	(*room)->id = 0;
+	// (*room)->visite = 0;
 	(*room)->prev = NULL;
 	(*room)->next = NULL;
 }
