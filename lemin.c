@@ -91,14 +91,17 @@ int			ft_room(t_fourmiliere **env, char *line, int *end, int *start)
 			tmp = tmp->next;
 		}
 		ft_newroom(&room, recup[0], ft_atoi(recup[1]), ft_atoi(recup[2]));
+		room->id = NBROOMS;
 		if (*start)
 		{
 			room->start = 1;
-			// room->visite = 1;
+			(*env)->id_start = room->id;
 		}
 		if (*end)
+		{
 			room->end = 1;
-		room->id = NBROOMS;
+			(*env)->id_end = room->id;
+		}
 		*start = 0;
 		*end = 0;
 		ft_addroomfront(env, room);
@@ -258,7 +261,6 @@ int			main(void)
 {
 	t_fourmiliere	*env;
 	int				start;
-	int				end;
 	t_rooms			*tmp;
 	// int i;//debug
 	// int j;//debug
@@ -269,16 +271,17 @@ int			main(void)
 		ft_printf("\nError\n");
 		exit (0);//error
 	}
-	tmp = env->rooms->head;
-	while (tmp)
-	{
-		if (tmp->start == 1)
-			start = tmp->id;
-		if (tmp->end == 1)
-			end = tmp->id;
-		tmp = tmp->next;
-	}
-	lemin (start, end, env->tubes, env->rooms->nb_rooms);
+	// tmp = env->rooms->head;
+	// while (tmp)
+	// {
+	// 	if (tmp->start == 1)
+	// 		start = tmp->id;
+	// 	if (tmp->end == 1)
+	// 		end = tmp->id;
+	// 	tmp = tmp->next;
+	// }
+	start = env->id_start;
+	lemin (start, env);
 	// ft_printf("start: %d, end: %d\n", start, end);
 	// //lemin (start, end, env->tubes, env->rooms->nb_rooms);
 
