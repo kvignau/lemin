@@ -27,6 +27,8 @@ int			nbfourmis(char *line, t_fourmiliere **env)
 	int		i;
 
 	i = 0;
+	if (line && line[0] == '+')
+		i++;
 	while (line && line[i])
 	{
 		if (!ft_isdigit(line[i]))
@@ -59,12 +61,13 @@ int					test_room(char *line)
 	return (0);
 }
 
-int			ft_room(t_fourmiliere **env, char *line, int *end, int *start)
+int				ft_room(t_fourmiliere **env, char *line, int *end, int *start)
 {
-	char	**recup;
-	t_rooms	*room;
-	int		ok;
-	t_rooms	*tmp;
+	char		**recup;
+	t_rooms		*room;
+	int			ok;
+	t_rooms		*tmp;
+	static int	nb = 1;
 
 	if (line[0] == '#' && line[1] == '#')
 	{
@@ -91,21 +94,26 @@ int			ft_room(t_fourmiliere **env, char *line, int *end, int *start)
 			tmp = tmp->next;
 		}
 		ft_newroom(&room, recup[0], ft_atoi(recup[1]), ft_atoi(recup[2]));
-		room->id = NBROOMS;
-		if (*start)
+		ft_addroomfront(env, room);
+		if (*start == 1)
 		{
-			room->start = 1;
-			(*env)->id_start = room->id;
+			(*env)->rooms->head->id = 0;
+			(*env)->rooms->head->start = 1;
+			nb--;
 		}
-		if (*end)
+		else if (*end == 1)
 		{
-			room->end = 1;
-			(*env)->id_end = room->id;
+			(*env)->rooms->head->id = 1;
+			(*env)->rooms->head->end = 1;
+			nb--;
 		}
+		else
+			(*env)->rooms->head->id = NBROOMS + nb;
 		*start = 0;
 		*end = 0;
-		ft_addroomfront(env, room);
 	}
+	if ((*env)->rooms->head && (*start) != 1 && (*end) != 1)
+		ft_printf("\nid room : %d, nom de la room : %s, x: %d, y: %d, start: %d, end: %d\n", (*env)->rooms->head->id, (*env)->rooms->head->name_room, (*env)->rooms->head->x, (*env)->rooms->head->y, (*env)->rooms->head->start, (*env)->rooms->head->end);
 	return (1);
 }
 
@@ -271,17 +279,20 @@ int			main(void)
 		ft_printf("\nError\n");
 		exit (0);//error
 	}
+
 	// tmp = env->rooms->head;
 	// while (tmp)
 	// {
 	// 	if (tmp->start == 1)
-	// 		start = tmp->id;
+	// 		env->id_start = tmp->id;
 	// 	if (tmp->end == 1)
-	// 		end = tmp->id;
+	// 		env->id_end = tmp->id;
 	// 	tmp = tmp->next;
 	// }
-	start = env->id_start;
-	lemin (start, env);
+	env->visite = (int *)malloc(sizeof(int) * env->rooms->nb_rooms);
+	ft_bzero(env->visite, sizeof(int) * env->rooms->nb_rooms);
+	env->visite[0] = 1;
+	lemin (0, env);
 	// ft_printf("start: %d, end: %d\n", start, end);
 	// //lemin (start, end, env->tubes, env->rooms->nb_rooms);
 

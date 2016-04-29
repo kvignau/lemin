@@ -84,20 +84,27 @@
 int		lemin(int start, t_fourmiliere *env)
 {
 	int			i;
-	// int			y;
+	int			y;
 	// int			j;
 
 	i = 0;
 	// y = 0;
 	//la premiere fois id room == start
 	ft_printf("START %d\n", start);
-	ft_printf("end %d\n", env->id_end);
 	while (i < env->rooms->nb_rooms)
 	{
-		ft_printf("matrice[%d][%d] == %d\n", start, i, env->tubes[start][i]);
-		if (env->tubes[start][i] == 1)
+		//ft_printf("matrice[%d][%d] == %d\n", start, i, env->tubes[start][i]);
+		y = 0; //debug
+		while (y < env->rooms->nb_rooms)
 		{
-			if (i == env->id_end)
+			ft_printf("%d ", env->visite[y]);
+			y++;
+		}
+		ft_printf("\n");
+		if (env->tubes[start][i] == 1 && env->visite[i] == 0)
+		{
+			//if (i == env->id_end)
+			if (i == 1)
 			{
 				ft_printf("!end reached [%d]\n", i);
 				ft_printf("COUCOU\n");
@@ -132,14 +139,16 @@ int		lemin(int start, t_fourmiliere *env)
 				// 	y++;
 				// }
 				ft_printf("jump to [%d]\n", i);
+				env->visite[i] = 1;
 				if (lemin(i, env) == 0)
 				{
 					ft_printf("return to last [-1]\n");
-					
+					env->visite[i] = 0;
 				}
 				else
 				{
 					ft_printf("save this way!\n");
+					//env->visite[i] = 1;
 				}
 				env->tubes[start][i] = 1;
 				env->tubes[i][start] = 1;

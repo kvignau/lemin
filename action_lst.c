@@ -29,6 +29,10 @@ void		initenv(t_fourmiliere **env)
 {
 	initlstrooms(env);
 	(*env)->nb_fourmis = -1;
+	(*env)->visite = NULL;
+	// (*env)->id_start = 0;
+	// (*env)->nb_end = 0;
+
 }
 
 void		ft_newroom(t_rooms **room, char *name, int x, int y)

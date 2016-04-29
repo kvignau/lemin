@@ -45,8 +45,9 @@ typedef struct		s_fourmiliere
 	t_lstrooms		*rooms;
 	//rajouter liste des tubes
 	int				**tubes;
-	int				id_start;
-	int				id_end;
+	int				*visite;
+	// int				id_start;
+	// int				id_end;
 }					t_fourmiliere;
 
 
