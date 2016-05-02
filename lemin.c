@@ -82,7 +82,10 @@ int				ft_room(t_fourmiliere **env, char *line, int *end, int *start)
 	{
 		recup = ft_strsplit(line, ' ');
 		if (!recup[0] || !recup[1] || !recup[2])
+		{
+			ft_deltab(recup);
 			return (0);
+		}
 		ok = test_room(line);
 		if (ok != 1)
 			return (ok);//error();
@@ -93,8 +96,9 @@ int				ft_room(t_fourmiliere **env, char *line, int *end, int *start)
 				return (-1);
 			tmp = tmp->next;
 		}
-		ft_newroom(&room, recup[0], ft_atoi(recup[1]), ft_atoi(recup[2]));
+		ft_newroom(&room, ft_strdup(recup[0]), ft_atoi(recup[1]), ft_atoi(recup[2]));
 		ft_addroomfront(env, room);
+		ft_deltab(recup);
 		if (*start == 1)
 		{
 			(*env)->rooms->head->id = 0;
@@ -198,7 +202,7 @@ int			ft_pipe(t_fourmiliere **env, char *line)
 		return (0);
 	(*env)->tubes[id_1][id_2] = 1;
 	(*env)->tubes[id_2][id_1] = 1;
-	
+	ft_deltab(recup);	
 	// //debug
 	// i = 0;
 	// while (i < NBROOMS)
@@ -213,6 +217,19 @@ int			ft_pipe(t_fourmiliere **env, char *line)
 	// 	i++;
 	// }
 	return (1);
+}
+
+void		ft_deltab(char **recup)
+{
+	int		i;
+
+	i = 0;
+	while (recup[i] != NULL)
+	{
+		free(recup[i]);
+		i++;
+	}
+	free(recup);
 }
 
 int			parsing_fourmiliere(t_fourmiliere **env)
@@ -261,6 +278,7 @@ int			parsing_fourmiliere(t_fourmiliere **env)
 				}
 			}
 		}
+		free(line);
 	}
 	return (1);
 }

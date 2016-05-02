@@ -98,4 +98,6 @@ void				ft_addchfront(t_linkedlst **lst, t_chemin *new_elem);
 //reso
 int					lemin(int start, t_fourmiliere *env, t_linkedlst **lstch, t_chemin *ch);
 
+void				ft_deltab(char **recup);
+
 #endif
