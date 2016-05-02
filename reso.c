@@ -81,75 +81,54 @@
 // 	return (0);
 // }
 
-int		lemin(int start, t_fourmiliere *env)
+void	ft_realloc(t_chemin *ch)
+{
+	int		*tmp;
+
+	ch->length_malloc *= 2;
+	tmp = (int *)malloc(sizeof(int) * ch->length_malloc);
+	ft_memcpy(tmp, ch->id, sizeof(int) * ch->length);
+	free(ch->id);
+	ch->id = tmp;
+}
+
+int		lemin(int start, t_fourmiliere *env, t_linkedlst **lstch, t_chemin *ch)
 {
 	int			i;
-	int			y;
+	int			ret;
+	t_node	 	*tmp;
 	// int			j;
 
 	i = 0;
-	// y = 0;
-	//la premiere fois id room == start
-	ft_printf("START %d\n", start);
 	while (i < env->rooms->nb_rooms)
 	{
-		//ft_printf("matrice[%d][%d] == %d\n", start, i, env->tubes[start][i]);
-		y = 0; //debug
-		while (y < env->rooms->nb_rooms)
-		{
-			ft_printf("%d ", env->visite[y]);
-			y++;
-		}
-		ft_printf("\n");
 		if (env->tubes[start][i] == 1 && env->visite[i] == 0)
 		{
-			//if (i == env->id_end)
 			if (i == 1)
 			{
-				ft_printf("!end reached [%d]\n", i);
-				ft_printf("COUCOU\n");
-				// ft_printf("\nenv->tubes finale\n");
-				// while (y < env->rooms->nb_rooms)
-				// {
-				// 	j = 0;
-				// 	while (j < env->rooms->nb_rooms)
-				// 	{
-				// 		ft_putnbr(env->tubes[y][j]);
-				// 		j++;
-				// 	}
-				// 	ft_printf("\n");
-				// 	y++;
-				// }
+				// ft_printf("!end reached [%d]\n", i);
 				return (1);
 			}
 			else
 			{
 				env->tubes[start][i] = 0;
 				env->tubes[i][start] = 0;
-				// ft_printf("\nnouvelle env->tubes \n");
-				// while (y < env->rooms->nb_rooms)
-				// {
-				// 	j = 0;
-				// 	while (j < env->rooms->nb_rooms)
-				// 	{
-				// 		ft_putnbr(env->tubes[y][j]);
-				// 		j++;
-				// 	}
-				// 	ft_printf("\n");
-				// 	y++;
-				// }
-				ft_printf("jump to [%d]\n", i);
+				// ft_printf("jump to [%d]\n", i);
 				env->visite[i] = 1;
-				if (lemin(i, env) == 0)
+				if (ch->length >= ch->length_malloc)
+					ft_realloc(ch);
+				ch->id[ch->length] = i;
+				ch->length = ch->length + 1;
+				ret = lemin(i, env, lstch, ch);
+				if (ret == 1)
 				{
-					ft_printf("return to last [-1]\n");
-					env->visite[i] = 0;
+					// ft_printf("save this way!\n");
+					ft_addchfront(lstch, ch);
 				}
-				else
-				{
-					ft_printf("save this way!\n");
-					//env->visite[i] = 1;
-				}
+				else if (ret == -1)
+					return (-1);
+				ch->length = ch->length - 1;
+				env->visite[i] = 0;
 				env->tubes[start][i] = 1;
 				env->tubes[i][start] = 1;
 			}

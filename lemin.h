@@ -51,20 +51,27 @@ typedef struct		s_fourmiliere
 }					t_fourmiliere;
 
 
-//liste de liste de chemin
 typedef struct		s_chemin
 {
 	int				*id;
-	struct s_chemin	*prev;
-	struct s_chemin	*next;
+	int				length;
+	int				length_malloc;
 }					t_chemin;
 
-typedef struct		s_lstchemin
+//liste de liste de chemin
+typedef struct		s_node
 {
-	size_t			nb_chemin;
-	t_chemin		*head;
-	t_chemin		*tail;
-}					t_lstchemin;
+	t_chemin		array;
+	struct s_node	*prev;
+	struct s_node	*next;
+}					t_node;
+
+typedef struct		s_linkedlst
+{
+	size_t			len;
+	t_node			*head;
+	t_node			*tail;
+}					t_linkedlst;
 
 //action liste, structure
 void				initlstrooms(t_fourmiliere **env);
@@ -83,7 +90,12 @@ int					parsing_fourmiliere(t_fourmiliere **env);
 int					ft_pipe(t_fourmiliere **env, char *line);
 int					start_end(t_fourmiliere *env);
 
+//chemin
+void				initlstchemin(t_linkedlst **lstchemin);
+int					ft_newchemin(t_chemin *ch);
+void				ft_addchfront(t_linkedlst **lst, t_chemin *new_elem);
+
 //reso
-int					lemin(int start, t_fourmiliere *env);
+int					lemin(int start, t_fourmiliere *env, t_linkedlst **lstch, t_chemin *ch);
 
 #endif

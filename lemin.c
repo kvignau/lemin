@@ -269,7 +269,10 @@ int			main(void)
 {
 	t_fourmiliere	*env;
 	int				start;
-	t_rooms			*tmp;
+	t_chemin		ch;
+	t_linkedlst		*lstch;
+	t_node			*tmp;//debug
+	int 			y;//debug
 	// int i;//debug
 	// int j;//debug
 
@@ -280,19 +283,31 @@ int			main(void)
 		exit (0);//error
 	}
 
-	// tmp = env->rooms->head;
-	// while (tmp)
-	// {
-	// 	if (tmp->start == 1)
-	// 		env->id_start = tmp->id;
-	// 	if (tmp->end == 1)
-	// 		env->id_end = tmp->id;
-	// 	tmp = tmp->next;
-	// }
 	env->visite = (int *)malloc(sizeof(int) * env->rooms->nb_rooms);
 	ft_bzero(env->visite, sizeof(int) * env->rooms->nb_rooms);
 	env->visite[0] = 1;
-	lemin (0, env);
+
+	ft_newchemin(&ch);
+	initlstchemin(&lstch);
+
+	if (lemin(0, env, &lstch, &ch) == -1)
+	{
+		ft_printf("\nError\n");
+		exit (0);//error
+	}
+	
+	tmp = lstch->head;
+	while (tmp)
+	{
+		y = 0;
+		while (y < tmp->array.length)
+		{
+			ft_printf("%d ", tmp->array.id[y]);
+			y++;
+		}
+		tmp = tmp->next;
+		ft_printf("\n");
+	}
 	// ft_printf("start: %d, end: %d\n", start, end);
 	// //lemin (start, end, env->tubes, env->rooms->nb_rooms);
 
