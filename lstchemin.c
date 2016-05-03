@@ -83,29 +83,12 @@ void		ft_addchfront(t_linkedlst **lst, t_chemin *array)
 				break ;
 			tmp = tmp->next;
 		}
-		if (tmp == (*lst)->head)
+		if (tmp == (*lst)->head && tmp->array.length > array->length)
 		{
-			if (tmp->array.length > array->length)
-			{
-				new_elem->prev = NULL;
-				new_elem->next = tmp;
-				tmp->prev = new_elem;
-				(*lst)->head = new_elem;
-			}
-			else if (tmp == (*lst)->tail)
-			{
-				new_elem->prev = tmp;
-				new_elem->next = NULL;
-				tmp->next = new_elem;
-				(*lst)->tail = new_elem;
-			}
-			else
-			{
-				new_elem->next = tmp->next;
-				new_elem->prev = tmp;
-				tmp->next->prev = new_elem;
-				tmp->next = new_elem;
-			}
+			new_elem->prev = NULL;
+			new_elem->next = tmp;
+			tmp->prev = new_elem;
+			(*lst)->head = new_elem;
 		}
 		else if (tmp == (*lst)->tail)
 		{
