@@ -97,7 +97,7 @@ int		lemin(int start, t_fourmiliere *env, t_linkedlst **lstch, t_chemin *ch)
 	int			i;
 	int			ret;
 	t_node	 	*tmp;
-	// int			j;
+	int			y;
 
 	i = 0;
 	while (i < env->rooms->nb_rooms)
