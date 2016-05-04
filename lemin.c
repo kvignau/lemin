@@ -291,6 +291,7 @@ int			main(void)
 	t_linkedlst		*lstch;
 	t_node			*tmp;//debug
 	int 			y;//debug
+	int 			j;//debug
 	// int i;//debug
 	// int j;//debug
 
@@ -328,6 +329,46 @@ int			main(void)
 	}
 	ft_printf("\n");
 
+// // fonction de suppression des chemins qui se croisent a revoir
+	// t_node	*tmp2;
+
+	// tmp = lstch->head->next;
+	// tmp2 = lstch->head;
+	// while (tmp)
+	// {
+	// 	j = 0;
+	// 	while (j < tmp2->array.length)
+	// 	{
+	// 		while (y < tmp->array.length)
+	// 		{
+	// 			if (tmp2->array.id[j] == tmp->array.id[y])
+	// 			{
+	// 				ft_delone(&lstch, tmp);
+	// 			}
+	// 			y++;
+	// 		}
+	// 		y = 0;
+	// 		j++;
+	// 	}
+	// 	if (tmp->next)
+	// 		tmp = tmp->next;
+	// 	else
+	// 		tmp = lstch->head->next;
+	// }
+
+	// tmp = lstch->head;
+	// while (tmp)
+	// {
+	// 	y = 0;
+	// 	while (y < tmp->array.length)
+	// 	{
+	// 		ft_printf("%d ", tmp->array.id[y]);
+	// 		y++;
+	// 	}
+	// 	tmp = tmp->next;
+	// 	ft_printf("\n");
+	// }
+	// ft_printf("\n");
 	// ft_printf("start: %d, end: %d\n", start, end);
 	// //lemin (start, end, env->tubes, env->rooms->nb_rooms);
 
