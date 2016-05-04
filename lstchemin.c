@@ -111,3 +111,19 @@ void		ft_addchfront(t_linkedlst **lst, t_chemin *array)
 	ft_memcpy(new_elem->array.id, array->id, sizeof(int) * array->length);
 	(*lst)->len += 1;
 }
+
+void		ft_delone(t_linkedlst **lst, t_node *delnode)
+{
+	t_node	*tmp;
+
+	tmp = (*lst)->head;
+	while (tmp != NULL && tmp != delnode)
+		tmp = tmp->next;
+	if (tmp == NULL)
+		return ;
+	tmp->prev->next = tmp->next;
+	tmp->next->prev = tmp->prev;
+	ft_bzero(tmp, sizeof(t_node));
+	free(tmp->array.id);
+	(*lst)->len -= 1;
+}

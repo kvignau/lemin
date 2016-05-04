@@ -94,6 +94,7 @@ int					start_end(t_fourmiliere *env);
 void				initlstchemin(t_linkedlst **lstchemin);
 int					ft_newchemin(t_chemin *ch);
 void				ft_addchfront(t_linkedlst **lst, t_chemin *new_elem);
+void				ft_delone(t_linkedlst **lst, t_node *delnode);
 
 //reso
 int					lemin(int start, t_fourmiliere *env, t_linkedlst **lstch, t_chemin *ch);
