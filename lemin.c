@@ -327,19 +327,7 @@ int			main(void)
 		ft_printf("\n");
 	}
 	ft_printf("\n");
-	ft_delone(&lstch, tmp);
-	tmp = lstch->head;
-	while (tmp)
-	{
-		y = 0;
-		while (y < tmp->array.length)
-		{
-			ft_printf("%d ", tmp->array.id[y]);
-			y++;
-		}
-		tmp = tmp->next;
-		ft_printf("\n");
-	}
+
 	// ft_printf("start: %d, end: %d\n", start, end);
 	// //lemin (start, end, env->tubes, env->rooms->nb_rooms);
 

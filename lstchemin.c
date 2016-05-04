@@ -121,8 +121,24 @@ void		ft_delone(t_linkedlst **lst, t_node *delnode)
 		tmp = tmp->next;
 	if (tmp == NULL)
 		return ;
-	tmp->prev->next = tmp->next;
-	tmp->next->prev = tmp->prev;
+	//a revoir
+	if (tmp == (*lst)->head)
+	{
+		(*lst)->head = tmp->next;
+		tmp->next->prev = NULL;
+		tmp->next = NULL;
+	}
+	else if (tmp == (*lst)->tail)
+	{
+		(*lst)->tail = tmp->prev;
+		tmp->prev->next = NULL;
+		tmp->prev = NULL;
+	}
+	else
+	{
+		tmp->prev->next = tmp->next;
+		tmp->next->prev = tmp->prev;
+	}
 	ft_bzero(tmp, sizeof(t_node));
 	free(tmp->array.id);
 	(*lst)->len -= 1;
