@@ -72,9 +72,9 @@ int				ft_room(t_fourmiliere **env, char *line, int *end, int *start)
 	if (line[0] == '#' && line[1] == '#')
 	{
 		if (ft_strequ("start", line + 2))
-			*start = 1;
+			(*start)++;
 		else if (ft_strequ("end", line + 2))
-			*end = 1;
+			(*end)++;
 		else
 			return (-1);
 	}
@@ -146,7 +146,6 @@ int					start_end(t_fourmiliere *env)
 void		ft_initpipe(t_fourmiliere **env)
 {
 	int		i;
-	// int		j;
 
 	i = 0;
 	(*env)->tubes = (int **)malloc(sizeof(int *) * NBROOMS);
@@ -156,19 +155,6 @@ void		ft_initpipe(t_fourmiliere **env)
 		ft_bzero((*env)->tubes[i], sizeof(int) * NBROOMS);
 		i++;
 	}
-	// //debug
-	// i = 0;
-	// while (i < NBROOMS)
-	// {
-	// 	j = 0;
-	// 	while (j < NBROOMS)
-	// 	{
-	// 		ft_putnbr((*env)->tubes[i][j]);
-	// 		j++;
-	// 	}
-	// 	ft_printf("\n");
-	// 	i++;
-	// }
 }
 
 int			ft_pipe(t_fourmiliere **env, char *line)
@@ -283,6 +269,48 @@ int			parsing_fourmiliere(t_fourmiliere **env)
 	return (1);
 }
 
+void		ft_removecrossch(t_linkedlst **lstch)
+{
+	t_node	*tmp;
+	t_node	*tmp2;
+	int		y;
+	int		j;
+	int		ok;
+
+	ok = 1;
+	tmp = (*lstch)->head;
+	while (tmp)
+	{
+		if (tmp->next)
+			tmp2 = tmp->next;
+		while (tmp2)
+		{
+			j = 0;
+			while (ok == 1 && j < tmp->array.length)
+			{
+				y = 0;
+				ft_printf("\nvaleur du tmp : %d\n", tmp->array.id[j]);
+				while (ok == 1 && y < tmp2->array.length)
+				{
+					ft_printf("valeur du tmp2 : %d", tmp2->array.id[y]);
+					if (tmp->array.id[j] == tmp2->array.id[y])
+					{
+						ft_printf("\nsuppression\n");
+						ft_delone(lstch, tmp2);
+						ok = 0;
+					}
+					y++;
+				}
+				j++;
+			}
+			ft_printf("\nchangement de tmp\n");
+			tmp2 = tmp2->next;
+			ok = 1;
+		}
+		tmp = tmp->next;
+	}
+}
+
 int			main(void)
 {
 	t_fourmiliere	*env;
@@ -328,7 +356,23 @@ int			main(void)
 		ft_printf("\n");
 	}
 	ft_printf("\n");
+	ft_printf("\n");
 
+	ft_removecrossch(&lstch);
+
+	tmp = lstch->head;
+	while (tmp)
+	{
+		y = 0;
+		while (y < tmp->array.length)
+		{
+			ft_printf("%d ", tmp->array.id[y]);
+			y++;
+		}
+		tmp = tmp->next;
+		ft_printf("\n");
+	}
+	ft_printf("\n");
 // // fonction de suppression des chemins qui se croisent a revoir
 	// t_node	*tmp2;
 

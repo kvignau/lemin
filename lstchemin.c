@@ -27,7 +27,7 @@ void		initlstchemin(t_linkedlst **lstchemin)
 
 int			ft_newchemin(t_chemin *ch)
 {
-	ch->length_malloc = 1;
+	ch->length_malloc = 32;
 	ch->length = 0;
 	ch->id = (int *)malloc(sizeof(int) * ch->length_malloc);
 	if (ch->id == NULL)
@@ -139,7 +139,7 @@ void		ft_delone(t_linkedlst **lst, t_node *delnode)
 		tmp->prev->next = tmp->next;
 		tmp->next->prev = tmp->prev;
 	}
-	ft_bzero(tmp, sizeof(t_node));
-	free(tmp->array.id);
+	// ft_bzero(tmp, sizeof(t_node));
+	// free(tmp->array.id);
 	(*lst)->len -= 1;
 }
