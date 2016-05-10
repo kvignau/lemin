@@ -317,14 +317,14 @@ int			nb_chemin(t_fourmiliere *env, t_linkedlst *lstch)
 	i = 0;
 	start_ch = 0;
 	end_ch = 0;
-	while (env->tubes[0])
+	while (i < env->rooms->nb_rooms)
 	{
 		if (env->tubes[0][i] == 1)
 			start_ch++;
 		i++;
 	}
 	i = 0;
-	while (env->tubes[1])
+	while (i < env->rooms->nb_rooms)
 	{
 		if (env->tubes[1][i] == 1)
 			end_ch++;
@@ -342,18 +342,20 @@ int			nb_chemin_hant(int res, t_fourmiliere *env, t_linkedlst *lstch)
 	int		ok;
 	t_node	*tmp;
 
-	i = 0;
-	i = 0;
 	tmp = lstch->head;
+	i = 1;
+	while (tmp && i < res)
+	{
+		tmp = tmp->next;
+		i++;
+	}
 	while (res > 1 && ok == 0)
 	{
-		while (tmp && i < res)
-		{
-			tmp = tmp->next;
-			i++;
-		}
 		if (env->nb_fourmis < tmp->array.length)
+		{
 			res--;
+			tmp = tmp->prev;
+		}
 		else
 			ok = 1;
 	}
