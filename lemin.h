@@ -73,6 +73,21 @@ typedef struct		s_linkedlst
 	t_node			*tail;
 }					t_linkedlst;
 
+//liste fourmis
+typedef struct		s_hant
+{
+	int				id_hant;
+	struct s_hant	*prev;
+	struct s_hant	*next;
+}					t_hant;
+
+typedef struct		s_lsthant
+{
+	size_t			len;
+	t_hant			*head;
+	t_hant			*tail;
+}					t_lsthant;
+
 //action liste, structure
 void				initlstrooms(t_fourmiliere **env);
 void				initenv(t_fourmiliere **env);

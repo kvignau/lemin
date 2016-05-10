@@ -312,7 +312,7 @@ void		nb_chemin(t_fourmiliere *env, t_linkedlst **lstch)
 	int		i;
 	int		end_ch;
 	int		start_ch;
-	int		res;
+	//int		res;
 
 	i = 0;
 	start_ch = 0;
@@ -339,6 +339,8 @@ int			nb_chemin_hant(int res, t_fourmiliere *env, t_linkedlst *lstch)
 	int		ok;
 	t_node	*tmp;
 
+	if (lstch->len == 1)
+		return (1);
 	tmp = lstch->head;
 	i = 1;
 	ok = 0;
@@ -347,7 +349,7 @@ int			nb_chemin_hant(int res, t_fourmiliere *env, t_linkedlst *lstch)
 		tmp = tmp->next;
 		i++;
 	}
-	while (res > 1 && ok == 0)
+	while (tmp && res > 1 && ok == 0)
 	{
 		if (env->nb_fourmis < tmp->array.length)
 		{
@@ -428,8 +430,6 @@ int			main(void)
 	}
 	ft_printf("\n");
 
-	// calcul du nombre de chemin a garder
-	
 	//creation des fourmis
 
 // // fonction de suppression des chemins qui se croisent a revoir
