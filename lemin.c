@@ -307,7 +307,7 @@ void		ft_removecrossch(t_linkedlst **lstch)
 	}
 }
 
-int			nb_chemin(t_fourmiliere *env, t_linkedlst *lstch)
+void		nb_chemin(t_fourmiliere *env, t_linkedlst **lstch)
 {
 	int		i;
 	int		end_ch;
@@ -330,10 +330,7 @@ int			nb_chemin(t_fourmiliere *env, t_linkedlst *lstch)
 			end_ch++;
 		i++;
 	}
-	// nb_chemin_hant((start_ch < end_ch) ? start_ch : end_ch);
-	// return ((start_ch < end_ch) ? start_ch : end_ch);
-	//seg fault here
-	return (nb_chemin_hant(((start_ch < end_ch) ? start_ch : end_ch), env, lstch));
+	ft_remove(lstch, nb_chemin_hant(((start_ch < end_ch) ? start_ch : end_ch), env, *lstch));
 }
 
 int			nb_chemin_hant(int res, t_fourmiliere *env, t_linkedlst *lstch)
@@ -344,6 +341,7 @@ int			nb_chemin_hant(int res, t_fourmiliere *env, t_linkedlst *lstch)
 
 	tmp = lstch->head;
 	i = 1;
+	ok = 0;
 	while (tmp && i < res)
 	{
 		tmp = tmp->next;
@@ -360,6 +358,25 @@ int			nb_chemin_hant(int res, t_fourmiliere *env, t_linkedlst *lstch)
 			ok = 1;
 	}
 	return (res);
+}
+
+void		ft_remove(t_linkedlst **lstch, int nb_supp)
+{
+	t_node	*tmp;
+	int		i;
+
+	i = 0;
+	tmp = (*lstch)->head;
+	while (tmp && i < nb_supp)
+	{
+		tmp = tmp->next;
+		i++;
+	}
+	while (tmp)
+	{
+		ft_delone(lstch, tmp);
+		tmp = tmp->next;
+	}
 }
 
 int			main(void)
@@ -394,6 +411,7 @@ int			main(void)
 		exit (0);//error
 	}
 	ft_removecrossch(&lstch);
+	nb_chemin(env, &lstch);	
 
 	//debug
 	tmp = lstch->head;
@@ -411,8 +429,6 @@ int			main(void)
 	ft_printf("\n");
 
 	// calcul du nombre de chemin a garder
-	start = nb_chemin(env, lstch);
-	ft_printf("COUCOU %d", start);
 	
 	//creation des fourmis
 
