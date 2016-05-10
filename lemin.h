@@ -77,6 +77,8 @@ typedef struct		s_linkedlst
 typedef struct		s_hant
 {
 	int				id_hant;
+	int				id_room;
+	int				move;
 	struct s_hant	*prev;
 	struct s_hant	*next;
 }					t_hant;
@@ -119,5 +121,10 @@ int					nb_chemin_hant(int res, t_fourmiliere *env, t_linkedlst *lstch);
 int					lemin(int start, t_fourmiliere *env, t_linkedlst **lstch, t_chemin *ch);
 
 void				ft_deltab(char **recup);
+
+//creation fourmis
+void				initlsthant(t_lsthant **lst);
+void				ft_newhant(t_hant **hant, int id_hant);
+void				create_hant(t_fourmiliere *env);
 
 #endif

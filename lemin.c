@@ -62,7 +62,7 @@ int			main(void)
 	ft_printf("\n");
 
 	//creation des fourmis
-
+	create_hant(env);
 // // fonction de suppression des chemins qui se croisent a revoir
 	// t_node	*tmp2;
 
