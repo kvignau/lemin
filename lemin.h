@@ -74,21 +74,21 @@ typedef struct		s_linkedlst
 }					t_linkedlst;
 
 //liste fourmis
-typedef struct		s_hant
+typedef struct		s_ant
 {
-	int				id_hant;
+	int				id_ant;
 	int				id_room;
 	int				move;
-	struct s_hant	*prev;
-	struct s_hant	*next;
-}					t_hant;
+	struct s_ant	*prev;
+	struct s_ant	*next;
+}					t_ant;
 
-typedef struct		s_lsthant
+typedef struct		s_lstant
 {
 	size_t			len;
-	t_hant			*head;
-	t_hant			*tail;
-}					t_lsthant;
+	t_ant			*head;
+	t_ant			*tail;
+}					t_lstant;
 
 //action liste, structure
 void				initlstrooms(t_fourmiliere **env);
@@ -123,8 +123,11 @@ int					lemin(int start, t_fourmiliere *env, t_linkedlst **lstch, t_chemin *ch);
 void				ft_deltab(char **recup);
 
 //creation fourmis
-void				initlsthant(t_lsthant **lst);
-void				ft_newhant(t_hant **hant, int id_hant);
-void				create_hant(t_fourmiliere *env);
+void				initlstant(t_lstant **lst);
+void				ft_newant(t_ant **ant, int id_ant);
+void				create_ant(t_fourmiliere *env);
+
+//move ant
+int					ft_finish(t_fourmiliere *env, t_lstant *lst);
 
 #endif
