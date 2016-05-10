@@ -289,13 +289,10 @@ void		ft_removecrossch(t_linkedlst **lstch)
 			while (ok == 1 && j < tmp->array.length)
 			{
 				y = 0;
-				ft_printf("\nvaleur du tmp : %d\n", tmp->array.id[j]);
 				while (ok == 1 && y < tmp2->array.length)
 				{
-					ft_printf("valeur du tmp2 : %d", tmp2->array.id[y]);
 					if (tmp->array.id[j] == tmp2->array.id[y])
 					{
-						ft_printf("\nsuppression\n");
 						ft_delone(lstch, tmp2);
 						ok = 0;
 					}
@@ -303,12 +300,64 @@ void		ft_removecrossch(t_linkedlst **lstch)
 				}
 				j++;
 			}
-			ft_printf("\nchangement de tmp\n");
 			tmp2 = tmp2->next;
 			ok = 1;
 		}
 		tmp = tmp->next;
 	}
+}
+
+int			nb_chemin(t_fourmiliere *env, t_linkedlst *lstch)
+{
+	int		i;
+	int		end_ch;
+	int		start_ch;
+	int		res;
+
+	i = 0;
+	start_ch = 0;
+	end_ch = 0;
+	while (env->tubes[0])
+	{
+		if (env->tubes[0][i] == 1)
+			start_ch++;
+		i++;
+	}
+	i = 0;
+	while (env->tubes[1])
+	{
+		if (env->tubes[1][i] == 1)
+			end_ch++;
+		i++;
+	}
+	// nb_chemin_hant((start_ch < end_ch) ? start_ch : end_ch);
+	// return ((start_ch < end_ch) ? start_ch : end_ch);
+	//seg fault here
+	return (nb_chemin_hant(((start_ch < end_ch) ? start_ch : end_ch), env, lstch));
+}
+
+int			nb_chemin_hant(int res, t_fourmiliere *env, t_linkedlst *lstch)
+{
+	int		i;
+	int		ok;
+	t_node	*tmp;
+
+	i = 0;
+	i = 0;
+	tmp = lstch->head;
+	while (res > 1 && ok == 0)
+	{
+		while (tmp && i < res)
+		{
+			tmp = tmp->next;
+			i++;
+		}
+		if (env->nb_fourmis < tmp->array.length)
+			res--;
+		else
+			ok = 1;
+	}
+	return (res);
 }
 
 int			main(void)
@@ -342,24 +391,9 @@ int			main(void)
 		ft_printf("\nError\n");
 		exit (0);//error
 	}
-	
-	tmp = lstch->head;
-	while (tmp)
-	{
-		y = 0;
-		while (y < tmp->array.length)
-		{
-			ft_printf("%d ", tmp->array.id[y]);
-			y++;
-		}
-		tmp = tmp->next;
-		ft_printf("\n");
-	}
-	ft_printf("\n");
-	ft_printf("\n");
-
 	ft_removecrossch(&lstch);
 
+	//debug
 	tmp = lstch->head;
 	while (tmp)
 	{
@@ -373,6 +407,13 @@ int			main(void)
 		ft_printf("\n");
 	}
 	ft_printf("\n");
+
+	// calcul du nombre de chemin a garder
+	start = nb_chemin(env, lstch);
+	ft_printf("COUCOU %d", start);
+	
+	//creation des fourmis
+
 // // fonction de suppression des chemins qui se croisent a revoir
 	// t_node	*tmp2;
 

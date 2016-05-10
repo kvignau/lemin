@@ -95,6 +95,8 @@ void				initlstchemin(t_linkedlst **lstchemin);
 int					ft_newchemin(t_chemin *ch);
 void				ft_addchfront(t_linkedlst **lst, t_chemin *new_elem);
 void				ft_delone(t_linkedlst **lst, t_node *delnode);
+void				ft_removecrossch(t_linkedlst **lstch);
+int					nb_chemin_hant(int res, t_fourmiliere *env, t_linkedlst *lstch);
 
 //reso
 int					lemin(int start, t_fourmiliere *env, t_linkedlst **lstch, t_chemin *ch);
