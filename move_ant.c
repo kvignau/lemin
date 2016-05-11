@@ -73,7 +73,7 @@ void			check_dispo(t_linkedlst *lst_ch, t_fourmiliere *env)
 					{
 						ant->id_room = ch->array.id[0];
 						ch->array.dispo[0] = 0;
-						ft_printf("\nL%d move in %d", ant->id_ant, ant->id_room);//display
+						ft_printf("L%d-%d ", ant->id_ant, ant->id_room);//display
 						break ;
 					}
 					ch = ch->next;
@@ -93,14 +93,14 @@ void			check_dispo(t_linkedlst *lst_ch, t_fourmiliere *env)
 								ant->id_room = ch->array.id[i + 1];
 								ch->array.dispo[i] = 1;
 								ch->array.dispo[i + 1] = 0;
-								ft_printf("\ndeja en chemin L%d move in %d", ant->id_ant, ant->id_room);//display
+								ft_printf("L%d-%d ", ant->id_ant, ant->id_room);//display
 								break ;
 							}
 							else
 							{
 								ant->id_room = 1;
 								ch->array.dispo[i] = 1;
-								ft_printf("\nL%d move in %d FINISH", ant->id_ant, ant->id_room);//display
+								ft_printf("L%d-%d ", ant->id_ant, ant->id_room);//display
 								break ;
 							}
 						}
@@ -111,5 +111,6 @@ void			check_dispo(t_linkedlst *lst_ch, t_fourmiliere *env)
 			}
 			ant = ant->next;
 		}
+		ft_printf("\n");
 	}
 }

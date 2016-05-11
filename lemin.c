@@ -49,19 +49,19 @@ int			main(void)
 	//fonction ajout tableau dispo
 	ajout_dispo(&lstch);
 	// //debug
-	// tmp = lstch->head;
-	// while (tmp)
-	// {
-	// 	y = 0;
-	// 	while (y < tmp->array.length)
-	// 	{
-	// 		ft_printf("%d ", tmp->array.id[y]);
-	// 		y++;
-	// 	}
-	// 	tmp = tmp->next;
-	// 	ft_printf("\n");
-	// }
-	// ft_printf("\n");
+	tmp = lstch->head;
+	while (tmp)
+	{
+		y = 0;
+		while (y < tmp->array.length)
+		{
+			ft_printf("%d ", tmp->array.id[y]);
+			y++;
+		}
+		tmp = tmp->next;
+		ft_printf("\n");
+	}
+	ft_printf("\n");
 	// tmp = lstch->head;
 	// while (tmp)
 	// {
