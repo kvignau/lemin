@@ -54,6 +54,7 @@ typedef struct		s_fourmiliere
 typedef struct		s_chemin
 {
 	int				*id;
+	int				*dispo;
 	int				length;
 	int				length_malloc;
 }					t_chemin;
@@ -125,9 +126,12 @@ void				ft_deltab(char **recup);
 //creation fourmis
 void				initlstant(t_lstant **lst);
 void				ft_newant(t_ant **ant, int id_ant);
-void				create_ant(t_fourmiliere *env);
+void				create_ant(t_lstant	**lst_ant, t_fourmiliere *env);
 
 //move ant
-int					ft_finish(t_fourmiliere *env, t_lstant *lst);
+int					finish(t_lstant *lst);
+void				check_dispo(t_linkedlst *lst_ch, t_fourmiliere *env);
+
+void				ajout_dispo(t_linkedlst **lstch);
 
 #endif

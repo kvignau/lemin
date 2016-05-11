@@ -123,3 +123,22 @@ void		ft_remove(t_linkedlst **lstch, int nb_supp)
 		tmp = tmp->next;
 	}
 }
+
+void		ajout_dispo(t_linkedlst **lstch)
+{
+	t_node	*tmp;
+	int		i;
+
+	tmp = (*lstch)->head;
+	while (tmp)
+	{
+		tmp->array.dispo = (int *)malloc(sizeof(int) * tmp->array.length);
+		i = 0;
+		while (i < tmp->array.length)
+		{
+			tmp->array.dispo[i] = 1;
+			i++;
+		}
+		tmp = tmp->next;
+	}
+}

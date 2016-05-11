@@ -44,25 +44,55 @@ int			main(void)
 		exit (0);//error
 	}
 	ft_removecrossch(&lstch);
-	nb_chemin(env, &lstch);	
+	nb_chemin(env, &lstch);
 
+	//fonction ajout tableau dispo
+	ajout_dispo(&lstch);
+	// //debug
+	// tmp = lstch->head;
+	// while (tmp)
+	// {
+	// 	y = 0;
+	// 	while (y < tmp->array.length)
+	// 	{
+	// 		ft_printf("%d ", tmp->array.id[y]);
+	// 		y++;
+	// 	}
+	// 	tmp = tmp->next;
+	// 	ft_printf("\n");
+	// }
+	// ft_printf("\n");
+	// tmp = lstch->head;
+	// while (tmp)
+	// {
+	// 	y = 0;
+	// 	ft_printf("\n");
+	// 	while (y < tmp->array.length)
+	// 	{
+	// 		ft_printf("%d", tmp->array.dispo[y]);
+	// 		y++;
+	// 	}
+	// 	tmp = tmp->next;
+	// }
+
+	//fonction resolution
+	check_dispo(lstch, env);
 	//debug
-	tmp = lstch->head;
-	while (tmp)
-	{
-		y = 0;
-		while (y < tmp->array.length)
-		{
-			ft_printf("%d ", tmp->array.id[y]);
-			y++;
-		}
-		tmp = tmp->next;
-		ft_printf("\n");
-	}
-	ft_printf("\n");
+	// tmp = lstch->head;
+	// while (tmp)
+	// {
+	// 	y = 0;
+	// 	while (y < tmp->array.length)
+	// 	{
+	// 		ft_printf("%d ", tmp->array.id[y]);
+	// 		y++;
+	// 	}
+	// 	tmp = tmp->next;
+	// 	ft_printf("\n");
+	// }
+	// ft_printf("\n");
 
 	//creation des fourmis
-	create_ant(env);
 // // fonction de suppression des chemins qui se croisent a revoir
 	// t_node	*tmp2;
 
