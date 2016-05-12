@@ -133,5 +133,6 @@ int					finish(t_lstant *lst);
 void				check_dispo(t_linkedlst *lst_ch, t_fourmiliere *env);
 
 void				ajout_dispo(t_linkedlst **lstch);
+void				display(int id_ant, int id_room, t_fourmiliere *env, int first);
 
 #endif

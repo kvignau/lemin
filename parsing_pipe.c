@@ -57,6 +57,8 @@ int			ft_pipe(t_fourmiliere **env, char *line)
 	int		id_2;
 
 	ok = 0;
+	if (line[0] == '#' && line[1] == '#')
+		return (1);
 	recup = ft_strsplit(line, '-');
 	if (!recup[0] || !recup[1])
 		return (0);
@@ -66,9 +68,15 @@ int			ft_pipe(t_fourmiliere **env, char *line)
 		if (ft_strequ(tmp->name_room, recup[0]) || ft_strequ(tmp->name_room, recup[1]))
 		{
 			if (ok == 0)
+			{
 				id_1 = tmp->id;
+				ft_printf("%s-", tmp->name_room);	
+			}
 			if (ok == 1)
+			{
 				id_2 = tmp->id;
+				ft_printf("%s\n", tmp->name_room);	
+			}
 			ok++;
 		}
 		tmp = tmp->next;
@@ -77,7 +85,7 @@ int			ft_pipe(t_fourmiliere **env, char *line)
 		return (0);
 	(*env)->tubes[id_1][id_2] = 1;
 	(*env)->tubes[id_2][id_1] = 1;
-	ft_deltab(recup);	
+	ft_deltab(recup);
 	return (1);
 }
 
@@ -114,7 +122,7 @@ int			parsing_fourmiliere(t_fourmiliere **env)
 			{
 				if (!nbfourmis(line, env))
 					return (0);
-				ft_printf("\n%d\n", (*env)->nb_fourmis);//debug
+				//ft_printf("%d\n", (*env)->nb_fourmis);//debug
 			}
 			else
 			{
@@ -135,7 +143,8 @@ int			parsing_fourmiliere(t_fourmiliere **env)
 				if (ok >= 1)
 				{
 					if (!ft_pipe(env, line))
-						return (0);
+						break ;
+						//return (0);
 					ok++;
 				}
 			}

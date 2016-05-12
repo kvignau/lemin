@@ -50,6 +50,23 @@ int			finish(t_lstant *lst_ant)
 // 	}
 // 	return (0);
 // }
+void			display(int id_ant, int id_room, t_fourmiliere *env, int first)
+{
+	t_rooms		*tmp;
+
+	tmp = env->rooms->head;
+	while (tmp != NULL)
+	{
+		if (tmp->id == id_room)
+		{
+			if (first == 1)
+				ft_printf("L%d-%s", id_ant, tmp->name_room);
+			else
+				ft_printf(" L%d-%s", id_ant, tmp->name_room);
+		}
+		tmp = tmp->next;
+	}
+}
 
 void			check_dispo(t_linkedlst *lst_ch, t_fourmiliere *env)
 {
@@ -57,10 +74,12 @@ void			check_dispo(t_linkedlst *lst_ch, t_fourmiliere *env)
 	t_lstant	*lst_ant;
 	t_ant		*ant;
 	int			i;
+	int			first;
 
 	create_ant(&lst_ant, env);
 	while (finish(lst_ant) == 0)
 	{
+		first = 0;
 		ant = lst_ant->head;
 		while (ant != NULL)
 		{
@@ -73,7 +92,9 @@ void			check_dispo(t_linkedlst *lst_ch, t_fourmiliere *env)
 					{
 						ant->id_room = ch->array.id[0];
 						ch->array.dispo[0] = 0;
-						ft_printf("L%d-%d ", ant->id_ant, ant->id_room);//display
+						first++;
+						display(ant->id_ant, ant->id_room, env, first);
+						//ft_printf("L%d-%d ", ant->id_ant, ant->id_room);//display
 						break ;
 					}
 					ch = ch->next;
@@ -93,14 +114,18 @@ void			check_dispo(t_linkedlst *lst_ch, t_fourmiliere *env)
 								ant->id_room = ch->array.id[i + 1];
 								ch->array.dispo[i] = 1;
 								ch->array.dispo[i + 1] = 0;
-								ft_printf("L%d-%d ", ant->id_ant, ant->id_room);//display
+								first++;
+								display(ant->id_ant, ant->id_room, env, first);
+								//ft_printf("L%d-%d ", ant->id_ant, ant->id_room);//display
 								break ;
 							}
 							else
 							{
 								ant->id_room = 1;
 								ch->array.dispo[i] = 1;
-								ft_printf("L%d-%d ", ant->id_ant, ant->id_room);//display
+								first++;
+								display(ant->id_ant, ant->id_room, env, first);
+								// ft_printf("L%d-%d ", ant->id_ant, ant->id_room);//display
 								break ;
 							}
 						}

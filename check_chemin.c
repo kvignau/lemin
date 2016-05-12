@@ -26,6 +26,8 @@ void		ft_removecrossch(t_linkedlst **lstch)
 	{
 		if (tmp->next)
 			tmp2 = tmp->next;
+		else
+			return ;
 		while (tmp2)
 		{
 			j = 0;

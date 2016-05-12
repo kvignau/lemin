@@ -16,7 +16,7 @@ int			iscomment(char *line)
 {
 	if (line[0] == '#' && line[1] != '#')
 	{
-		ft_printf("\n%s\n", line);//debug
+		ft_printf("%s\n", line);//debug
 		return (1);
 	}
 	return (0);
@@ -38,6 +38,7 @@ int			nbfourmis(char *line, t_fourmiliere **env)
 	(*env)->nb_fourmis = ft_atoi(line);
 	if ((*env)->nb_fourmis == 0 && line[0] != '0')
 		return (0);
+	ft_printf("%d\n", (*env)->nb_fourmis);
 	return (1);
 }
 
@@ -75,8 +76,7 @@ int				ft_room(t_fourmiliere **env, char *line, int *end, int *start)
 			(*start)++;
 		else if (ft_strequ("end", line + 2))
 			(*end)++;
-		else
-			return (-1);
+		ft_printf("%s\n", line);
 	}
 	else
 	{
@@ -117,6 +117,6 @@ int				ft_room(t_fourmiliere **env, char *line, int *end, int *start)
 		*end = 0;
 	}
 	if ((*env)->rooms->head && (*start) != 1 && (*end) != 1)
-		ft_printf("\nid room : %d, nom de la room : %s, x: %d, y: %d, start: %d, end: %d\n", (*env)->rooms->head->id, (*env)->rooms->head->name_room, (*env)->rooms->head->x, (*env)->rooms->head->y, (*env)->rooms->head->start, (*env)->rooms->head->end);
+		ft_printf("%s %d %d\n", (*env)->rooms->head->name_room, (*env)->rooms->head->x, (*env)->rooms->head->y);
 	return (1);
 }

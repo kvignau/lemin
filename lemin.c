@@ -15,7 +15,7 @@
 int			main(void)
 {
 	t_fourmiliere	*env;
-	int				start;
+	//int				start;
 	t_chemin		ch;
 	t_linkedlst		*lstch;
 	t_node			*tmp;//debug
@@ -39,6 +39,11 @@ int			main(void)
 	initlstchemin(&lstch);
 
 	if (lemin(0, env, &lstch, &ch) == -1)
+	{
+		ft_printf("\nError\n");
+		exit (0);//error
+	}
+	if (lstch->len == 0)
 	{
 		ft_printf("\nError\n");
 		exit (0);//error
