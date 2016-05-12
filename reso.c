@@ -53,7 +53,7 @@ int		lemin(int start, t_fourmiliere *env, t_linkedlst **lstch, t_chemin *ch)
 				ret = lemin(i, env, lstch, ch);
 				if (ret == 1)
 				{
-					// ft_printf("save this way!\n");
+					//ft_printf("save this way!\n");
 					ft_addchfront(lstch, ch);
 				}
 				else if (ret == -1)
