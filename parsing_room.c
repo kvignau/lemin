@@ -16,7 +16,7 @@ int			iscomment(char *line)
 {
 	if (line[0] == '#' && line[1] != '#')
 	{
-		// ft_printf("%s\n", line);//afficher commentaires
+		ft_printf("%s\n", line);//afficher commentaires
 		return (1);
 	}
 	return (0);
