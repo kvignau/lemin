@@ -68,6 +68,21 @@ void			display(int id_ant, int id_room, t_fourmiliere *env, int first)
 	}
 }
 
+void			debutfin(t_lstant *lst_ant, t_fourmiliere *env)
+{
+	t_ant		*ant;
+	int			first;
+
+	first = 1;
+	ant = lst_ant->head;
+	while (ant)
+	{
+		display(ant->id_ant, ant->id_room, env, first);
+		first++;
+		ant = ant->next;
+	}
+}
+
 void			check_dispo(t_linkedlst *lst_ch, t_fourmiliere *env)
 {
 	t_node		*ch;
@@ -79,7 +94,8 @@ void			check_dispo(t_linkedlst *lst_ch, t_fourmiliere *env)
 	create_ant(&lst_ant, env);
 	if (lst_ch->head->array.id[0] == 1)
 	{
-		ft_printf("ALL ANT");
+		debutfin(lst_ant, env);
+		//ft_printf("ALL ANT");
 		return ;
 	}
 	while (finish(lst_ant) == 0)
