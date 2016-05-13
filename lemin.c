@@ -38,6 +38,20 @@ int			main(void)
 	ft_newchemin(&ch);
 	initlstchemin(&lstch);
 
+	//debug matrice
+	// int i = 0;
+	// while (i < env->rooms->nb_rooms)
+	// {
+	// 	j = 0;
+	// 	while (j < env->rooms->nb_rooms)
+	// 	{
+	// 		ft_putnbr(env->tubes[i][j]);
+	// 		j++;
+	// 	}
+	// 	ft_printf("\n");
+	// 	i++;
+	// }
+
 	if (lemin(0, env, &lstch, &ch) == -1)
 	{
 		ft_printf("\nError\n");
@@ -48,6 +62,22 @@ int			main(void)
 		ft_printf("\nError\n");
 		exit (0);//error
 	}
+	//debug
+	// tmp = lstch->head;
+	// ft_printf("ajout salle fin\n");
+	// while (tmp)
+	// {
+	// 	y = 0;
+	// 	while (y < tmp->array.length)
+	// 	{
+	// 		ft_printf("%d ", tmp->array.id[y]);
+	// 		y++;
+	// 	}
+	// 	tmp = tmp->next;
+	// 	ft_printf("\n");
+	// }
+	// ft_printf("\n\n");
+
 	ft_removecrossch(&lstch);
 	nb_chemin(env, &lstch);
 

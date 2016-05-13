@@ -29,15 +29,30 @@ int		lemin(int start, t_fourmiliere *env, t_linkedlst **lstch, t_chemin *ch)
 	int			ret;
 	t_node	 	*tmp;
 	int			y;
+	int			stop;
 
 	i = 0;
-	while (i < env->rooms->nb_rooms)
+	stop = 0;
+	while (stop == 0 && i < env->rooms->nb_rooms)
 	{
 		if (env->tubes[start][i] == 1 && env->visite[i] == 0)
 		{
 			if (i == 1)
 			{
 				// ft_printf("!end reached [%d]\n", i);
+				// if (ch->length >= ch->length_malloc)
+				// 	ft_realloc(ch);
+				// ch->id[ch->length] = i;
+				// ch->length = ch->length + 1;
+				if (ch->length == 0)
+				{
+					if (ch->length >= ch->length_malloc)
+					 	ft_realloc(ch);
+					ch->id[ch->length] = i;
+					ch->length = ch->length + 1;
+					stop++;
+				}
+				ft_addchfront(lstch, ch);
 				return (1);
 			}
 			else
@@ -54,7 +69,7 @@ int		lemin(int start, t_fourmiliere *env, t_linkedlst **lstch, t_chemin *ch)
 				if (ret == 1)
 				{
 					//ft_printf("save this way!\n");
-					ft_addchfront(lstch, ch);
+				//	ft_addchfront(lstch, ch);
 				}
 				else if (ret == -1)
 					return (-1);

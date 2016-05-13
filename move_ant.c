@@ -77,6 +77,11 @@ void			check_dispo(t_linkedlst *lst_ch, t_fourmiliere *env)
 	int			first;
 
 	create_ant(&lst_ant, env);
+	if (lst_ch->head->array.id[0] == 1)
+	{
+		ft_printf("ALL ANT");
+		return ;
+	}
 	while (finish(lst_ant) == 0)
 	{
 		first = 0;

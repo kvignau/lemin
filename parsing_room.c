@@ -16,7 +16,7 @@ int			iscomment(char *line)
 {
 	if (line[0] == '#' && line[1] != '#')
 	{
-		ft_printf("%s\n", line);//debug
+		// ft_printf("%s\n", line);//afficher commentaires
 		return (1);
 	}
 	return (0);
@@ -73,10 +73,16 @@ int				ft_room(t_fourmiliere **env, char *line, int *end, int *start)
 	if (line[0] == '#' && line[1] == '#')
 	{
 		if (ft_strequ("start", line + 2))
+		{
 			(*start)++;
+			ft_printf("%s\n", line);
+		}
 		else if (ft_strequ("end", line + 2))
+		{
 			(*end)++;
-		ft_printf("%s\n", line);
+			ft_printf("%s\n", line);
+		}
+		// ft_printf("%s\n", line); // affiche les ligne ## a ignorer ???
 	}
 	else
 	{
