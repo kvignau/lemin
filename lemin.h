@@ -14,6 +14,7 @@
 # define LEMIN_H
 
 # include "ft_printf/ft_printf.h"
+# define MAXINT "2147483647"
 # define LSTROOMS (*env)->rooms
 # define HROOMS (*env)->rooms->head
 # define TROOMS (*env)->rooms->tail

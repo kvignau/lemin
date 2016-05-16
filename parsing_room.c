@@ -35,7 +35,21 @@ int			nbfourmis(char *line, t_fourmiliere **env)
 			return (0);
 		i++;
 	}
-	(*env)->nb_fourmis = ft_atoi(line);
+	if (strlen(line) > 10)
+		return (0);
+	if (strlen(line) == 10)
+	{
+		i = 0;
+		while (line && line[i])
+		{
+			if (line[i] < MAXINT[i])
+				break ;
+			else if (line[i] > MAXINT[i])
+				return (0);
+			i++;
+		}
+	}
+	(*env)->nb_fourmis = ft_atoi(line);//comparer les deux chaines de char?
 	if ((*env)->nb_fourmis == 0 && line[0] != '0')
 		return (0);
 	ft_printf("%d\n", (*env)->nb_fourmis);
