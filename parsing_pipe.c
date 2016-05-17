@@ -48,6 +48,24 @@ void		ft_initpipe(t_fourmiliere **env)
 	}
 }
 
+int			split_minus(char *line)
+{
+	int		i;
+	int		minus;
+
+	i = 0;
+	minus = 0;
+	while (line[i])
+	{
+		if (line[i] == '-')
+			minus++;
+		if (minus >= 2)
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 int			ft_pipe(t_fourmiliere **env, char *line)
 {
 	char	**recup;
@@ -59,6 +77,8 @@ int			ft_pipe(t_fourmiliere **env, char *line)
 	ok = 0;
 	if (line[0] == '#' && line[1] == '#')
 		return (1);
+	if (!split_minus(line))
+		return (0);
 	recup = ft_strsplit(line, '-');
 	if (!recup[0] || !recup[1])
 		return (0);

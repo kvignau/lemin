@@ -76,6 +76,24 @@ int					test_room(char *line)
 	return (0);
 }
 
+int			split_space(char *line)
+{
+	int		i;
+	int		space;
+
+	i = 0;
+	space = 0;
+	while (line[i])
+	{
+		if (line[i] == ' ')
+			space++;
+		if (space >= 3)
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 int				ft_room(t_fourmiliere **env, char *line, int *end, int *start)
 {
 	char		**recup;

@@ -104,8 +104,10 @@ int					iscomment(char *line);
 int					nbfourmis(char *line, t_fourmiliere **env);
 int					test_room(char *line);
 void				ft_initpipe(t_fourmiliere **env);
+int					split_space(char *line);
 int					ft_room(t_fourmiliere **env, char *line, int *end, int *start);
 int					parsing_fourmiliere(t_fourmiliere **env);
+int					split_minus(char *line);
 int					ft_pipe(t_fourmiliere **env, char *line);
 int					start_end(t_fourmiliere *env);
 
