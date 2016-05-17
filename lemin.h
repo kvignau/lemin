@@ -93,6 +93,7 @@ typedef struct		s_lstant
 }					t_lstant;
 
 //action liste, structure
+void				error(t_linkedlst **lstch, t_fourmiliere **env);
 void				initlstrooms(t_fourmiliere **env);
 void				initenv(t_fourmiliere **env);
 void				ft_newroom(t_rooms **room, char *name, int x, int y);
