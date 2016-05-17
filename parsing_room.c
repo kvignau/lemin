@@ -49,7 +49,7 @@ int			nbfourmis(char *line, t_fourmiliere **env)
 			i++;
 		}
 	}
-	(*env)->nb_fourmis = ft_atoi(line);//comparer les deux chaines de char?
+	(*env)->nb_fourmis = ft_atoi(line);
 	if ((*env)->nb_fourmis == 0 && line[0] != '0')
 		return (0);
 	ft_printf("%d\n", (*env)->nb_fourmis);
@@ -116,6 +116,8 @@ int				ft_room(t_fourmiliere **env, char *line, int *end, int *start)
 		}
 		// ft_printf("%s\n", line); // affiche les ligne ## a ignorer ???
 	}
+	else if (line[0] == 'L')
+		return (0);
 	else
 	{
 		recup = ft_strsplit(line, ' ');

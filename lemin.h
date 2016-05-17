@@ -123,7 +123,6 @@ int					nb_chemin_hant(int res, t_fourmiliere *env, t_linkedlst *lstch);
 
 //reso
 int					lemin(int start, t_fourmiliere *env, t_linkedlst **lstch, t_chemin *ch);
-
 void				ft_deltab(char **recup);
 
 //creation fourmis

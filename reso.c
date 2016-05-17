@@ -39,11 +39,6 @@ int		lemin(int start, t_fourmiliere *env, t_linkedlst **lstch, t_chemin *ch)
 		{
 			if (i == 1)
 			{
-				// ft_printf("!end reached [%d]\n", i);
-				// if (ch->length >= ch->length_malloc)
-				// 	ft_realloc(ch);
-				// ch->id[ch->length] = i;
-				// ch->length = ch->length + 1;
 				if (ch->length == 0)
 				{
 					if (ch->length >= ch->length_malloc)
@@ -59,19 +54,13 @@ int		lemin(int start, t_fourmiliere *env, t_linkedlst **lstch, t_chemin *ch)
 			{
 				env->tubes[start][i] = 0;
 				env->tubes[i][start] = 0;
-				// ft_printf("jump to [%d]\n", i);
 				env->visite[i] = 1;
 				if (ch->length >= ch->length_malloc)
 					ft_realloc(ch);
 				ch->id[ch->length] = i;
 				ch->length = ch->length + 1;
 				ret = lemin(i, env, lstch, ch);
-				if (ret == 1)
-				{
-					//ft_printf("save this way!\n");
-				//	ft_addchfront(lstch, ch);
-				}
-				else if (ret == -1)
+				if (ret == -1)
 					return (-1);
 				ch->length = ch->length - 1;
 				env->visite[i] = 0;
