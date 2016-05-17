@@ -26,30 +26,6 @@ int			finish(t_lstant *lst_ant)
 	return (1);
 }
 
-// int			check_dispo(t_linkedlst *lst_ch, t_lstant *lst_ant)
-// {
-// 	t_node	*ch;
-// 	t_ant	*ant;
-// 	int		i;
-
-// 	i = 0;
-// 	ch = lst_ch->head;
-// 	ant = lst_ant->head;
-// 	while (ant)
-// 	{
-// 		while (ch->array.length < i)
-// 		{
-// 			if (ant->id_room == p->id_room[i])
-// 			{
-// 				ft_move(p->id_room);
-// 				return (1);
-// 			}
-// 			i++;
-// 		}
-// 		ant = ant->next;
-// 	}
-// 	return (0);
-// }
 void			display(int id_ant, int id_room, t_fourmiliere *env, int first)
 {
 	t_rooms		*tmp;
@@ -81,6 +57,7 @@ void			debutfin(t_lstant *lst_ant, t_fourmiliere *env)
 		first++;
 		ant = ant->next;
 	}
+	ft_printf("\n");
 }
 
 void			remove_ant(t_lstant **lstant)

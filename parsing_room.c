@@ -71,9 +71,7 @@ int					test_room(char *line)
 			return (-1);
 		i++;
 	}
-	if (space == 2)
-		return (1);
-	return (0);
+	return (1);
 }
 
 int			split_space(char *line)
@@ -94,6 +92,39 @@ int			split_space(char *line)
 	return (1);
 }
 
+void			info_room(int *start, int *end, char *line)
+{
+	if (ft_strequ("start", line + 2))
+	{
+		(*start)++;
+		ft_printf("%s\n", line);
+	}
+	else if (ft_strequ("end", line + 2))
+	{
+		(*end)++;
+		ft_printf("%s\n", line);
+	}
+	// ft_printf("%s\n", line); // affiche les ligne ## a ignorer ???
+}
+
+void			id_room(int start, int end, int *nb, t_fourmiliere **env)
+{
+	if (start == 1)
+	{
+		(*env)->rooms->head->id = 0;
+		(*env)->rooms->head->start = 1;
+		(*nb)--;
+	}
+	else if (end == 1)
+	{
+		(*env)->rooms->head->id = 1;
+		(*env)->rooms->head->end = 1;
+		(*nb)--;
+	}
+	else
+		(*env)->rooms->head->id = NBROOMS + (*nb);
+}
+
 int				ft_room(t_fourmiliere **env, char *line, int *end, int *start)
 {
 	char		**recup;
@@ -103,19 +134,7 @@ int				ft_room(t_fourmiliere **env, char *line, int *end, int *start)
 	static int	nb = 1;
 
 	if (line[0] == '#' && line[1] == '#')
-	{
-		if (ft_strequ("start", line + 2))
-		{
-			(*start)++;
-			ft_printf("%s\n", line);
-		}
-		else if (ft_strequ("end", line + 2))
-		{
-			(*end)++;
-			ft_printf("%s\n", line);
-		}
-		// ft_printf("%s\n", line); // affiche les ligne ## a ignorer ???
-	}
+		info_room(start, end, line);
 	else if (line[0] == 'L')
 		return (0);
 	else
@@ -130,7 +149,7 @@ int				ft_room(t_fourmiliere **env, char *line, int *end, int *start)
 		}
 		ok = test_room(line);
 		if (ok != 1)
-			return (ok);//error();
+			return (ok);
 		tmp = HROOMS;
 		while (tmp)
 		{
@@ -141,20 +160,7 @@ int				ft_room(t_fourmiliere **env, char *line, int *end, int *start)
 		ft_newroom(&room, ft_strdup(recup[0]), ft_atoi(recup[1]), ft_atoi(recup[2]));
 		ft_addroomfront(env, room);
 		ft_deltab(recup);
-		if (*start == 1)
-		{
-			(*env)->rooms->head->id = 0;
-			(*env)->rooms->head->start = 1;
-			nb--;
-		}
-		else if (*end == 1)
-		{
-			(*env)->rooms->head->id = 1;
-			(*env)->rooms->head->end = 1;
-			nb--;
-		}
-		else
-			(*env)->rooms->head->id = NBROOMS + nb;
+		id_room(*start, *end, &nb, env);
 		*start = 0;
 		*end = 0;
 	}

@@ -47,7 +47,6 @@ void		error(t_linkedlst **lstch, t_fourmiliere **env)
 		if ((*env)->visite)
 			free((*env)->visite);
 	}
-	while (1);
 	exit (0);
 }
 
@@ -127,6 +126,5 @@ int			main(void)
 	ft_printf("\n");
 	check_dispo(lstch, env);
 	free_all(&lstch, &env);
-	while (1);
 	return (0);
 }

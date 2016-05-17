@@ -99,6 +99,8 @@ void				ft_delrooms(t_fourmiliere **env);
 
 //fonction lemin.c
 int					iscomment(char *line);
+void				info_room(int *start, int *end, char *line);
+void				id_room(int start, int end, int *nb, t_fourmiliere **env);
 int					nbfourmis(char *line, t_fourmiliere **env);
 int					test_room(char *line);
 void				ft_initpipe(t_fourmiliere **env);
