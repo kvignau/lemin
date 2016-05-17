@@ -120,6 +120,8 @@ int				ft_room(t_fourmiliere **env, char *line, int *end, int *start)
 		return (0);
 	else
 	{
+		if (split_space(line) == 0)
+			return (0);
 		recup = ft_strsplit(line, ' ');
 		if (!recup[0] || !recup[1] || !recup[2])
 		{

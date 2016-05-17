@@ -152,18 +152,27 @@ int			parsing_fourmiliere(t_fourmiliere **env)
 					if (roomok == 0)
 						ok++;
 					if (roomok == -1)
+					{
+						free(line);
 						return (0);
+					}
 				}
 				if (ok == 1)
 				{
 					if (!start_end(*env))
+					{
+						free(line);
 						return (0);
+					}
 					ft_initpipe(env);
 				}
 				if (ok >= 1)
 				{
 					if (!ft_pipe(env, line))
+					{
+						free(line);
 						break ;
+					}
 						//return (0);
 					ok++;
 				}

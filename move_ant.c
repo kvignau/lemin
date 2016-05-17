@@ -83,6 +83,24 @@ void			debutfin(t_lstant *lst_ant, t_fourmiliere *env)
 	}
 }
 
+void			remove_ant(t_lstant **lstant)
+{
+	t_ant		*ant;
+
+	ant = NULL;
+	if ((*lstant)->head->next)
+		ant = (*lstant)->head->next;
+	while (ant != NULL)
+	{
+		free(ant->prev);
+		ant = ant->next;
+	}
+	free((*lstant)->tail);
+	(*lstant)->head = NULL;
+	(*lstant)->tail = NULL;
+	free(*lstant);
+}
+
 void			check_dispo(t_linkedlst *lst_ch, t_fourmiliere *env)
 {
 	t_node		*ch;
@@ -95,6 +113,7 @@ void			check_dispo(t_linkedlst *lst_ch, t_fourmiliere *env)
 	if (lst_ch->head->array.id[0] == 1)
 	{
 		debutfin(lst_ant, env);
+		remove_ant(&lst_ant);
 		//ft_printf("ALL ANT");
 		return ;
 	}
@@ -159,4 +178,5 @@ void			check_dispo(t_linkedlst *lst_ch, t_fourmiliere *env)
 		}
 		ft_printf("\n");
 	}
+	remove_ant(&lst_ant);
 }

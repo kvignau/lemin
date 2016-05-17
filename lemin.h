@@ -44,11 +44,8 @@ typedef struct		s_fourmiliere
 {
 	int				nb_fourmis;
 	t_lstrooms		*rooms;
-	//rajouter liste des tubes
 	int				**tubes;
 	int				*visite;
-	// int				id_start;
-	// int				id_end;
 }					t_fourmiliere;
 
 
@@ -138,5 +135,8 @@ void				check_dispo(t_linkedlst *lst_ch, t_fourmiliere *env);
 void				ajout_dispo(t_linkedlst **lstch);
 void				display(int id_ant, int id_room, t_fourmiliere *env, int first);
 void				debutfin(t_lstant *lst_ant, t_fourmiliere *env);
+void				free_all(t_linkedlst **lstch, t_fourmiliere **env);
+void				error(t_linkedlst **lstch, t_fourmiliere **env);
+void				free_ch(t_linkedlst **lstch);
 
 #endif

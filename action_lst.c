@@ -30,6 +30,7 @@ void		initenv(t_fourmiliere **env)
 	initlstrooms(env);
 	(*env)->nb_fourmis = -1;
 	(*env)->visite = NULL;
+	(*env)->tubes = NULL;
 
 }
 
