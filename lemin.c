@@ -14,28 +14,14 @@
 
 void		error(t_linkedlst **lstch, t_fourmiliere **env)
 {
-	t_rooms	*rooms;
 	int		i;
 
 	i = 0;
-	ft_putstr("Error");
+	ft_putstr("Error\n");
 	free_ch(lstch);
 	if ((*env)->rooms->head != NULL)
 	{
-		if ((*env)->rooms->head->next)
-			rooms = (*env)->rooms->head->next;
-		else
-			rooms = NULL;
-		while (rooms != NULL)
-		{
-			free(rooms->prev->name_room);
-			free(rooms->prev);
-			rooms = rooms->next;
-		}
-		free((*env)->rooms->tail->name_room);
-		free((*env)->rooms->tail);
-		(*env)->rooms->head = NULL;
-		(*env)->rooms->tail = NULL;
+		del_room(env);
 		if ((*env)->tubes != NULL)
 		{
 			while (i < (*env)->rooms->nb_rooms)
@@ -48,6 +34,26 @@ void		error(t_linkedlst **lstch, t_fourmiliere **env)
 			free((*env)->visite);
 	}
 	exit (0);
+}
+
+void		del_room(t_fourmiliere **env)
+{
+	t_rooms	*rooms;
+
+	if ((*env)->rooms->head->next)
+		rooms = (*env)->rooms->head->next;
+	else
+		rooms = NULL;
+	while (rooms != NULL)
+	{
+		free(rooms->prev->name_room);
+		free(rooms->prev);
+		rooms = rooms->next;
+	}
+	free((*env)->rooms->tail->name_room);
+	free((*env)->rooms->tail);
+	(*env)->rooms->head = NULL;
+	(*env)->rooms->tail = NULL;
 }
 
 void		free_ch(t_linkedlst **lstch)
@@ -72,33 +78,55 @@ void		free_ch(t_linkedlst **lstch)
 	free(*lstch);
 }
 
+// void		free_all(t_linkedlst **lstch, t_fourmiliere **env)
+// {
+// 	t_rooms	*rooms;
+// 	int		i;
+
+// 	i = 0;
+// 	free_ch(lstch);
+// 	if ((*env)->rooms->head != NULL)
+// 	{
+// 		if ((*env)->rooms->head->next)
+// 			rooms = (*env)->rooms->head->next;
+// 		while (i < (*env)->rooms->nb_rooms)
+// 		{
+// 			free((*env)->tubes[i]);
+// 			i++;
+// 		}
+// 		while (rooms != NULL)
+// 		{
+// 			free(rooms->prev->name_room);
+// 			free(rooms->prev);
+// 			rooms = rooms->next;
+// 		}
+// 		free((*env)->rooms->tail->name_room);
+// 		free((*env)->rooms->tail);
+// 		(*env)->rooms->head = NULL;
+// 		(*env)->rooms->tail = NULL;
+// 		free((*env)->visite);
+// 	}
+// }
+
 void		free_all(t_linkedlst **lstch, t_fourmiliere **env)
 {
-	t_rooms	*rooms;
 	int		i;
 
 	i = 0;
 	free_ch(lstch);
 	if ((*env)->rooms->head != NULL)
 	{
-		if ((*env)->rooms->head->next)
-			rooms = (*env)->rooms->head->next;
-		while (i < (*env)->rooms->nb_rooms)
+		del_room(env);
+		if ((*env)->tubes != NULL)
 		{
-			free((*env)->tubes[i]);
-			i++;
+			while (i < (*env)->rooms->nb_rooms)
+			{
+				free((*env)->tubes[i]);
+				i++;
+			}
 		}
-		while (rooms != NULL)
-		{
-			free(rooms->prev->name_room);
-			free(rooms->prev);
-			rooms = rooms->next;
-		}
-		free((*env)->rooms->tail->name_room);
-		free((*env)->rooms->tail);
-		(*env)->rooms->head = NULL;
-		(*env)->rooms->tail = NULL;
-		free((*env)->visite);
+		if ((*env)->visite)
+			free((*env)->visite);
 	}
 }
 
@@ -126,5 +154,6 @@ int			main(void)
 	ft_printf("\n");
 	check_dispo(lstch, env);
 	free_all(&lstch, &env);
+	//while (1);
 	return (0);
 }

@@ -117,6 +117,7 @@ int					ft_newchemin(t_chemin *ch);
 void				ft_addchfront(t_linkedlst **lst, t_chemin *new_elem);
 void				ft_delone(t_linkedlst **lst, t_node *delnode);
 void				ft_removecrossch(t_linkedlst **lstch);
+void				rm_cross(t_node *tmp, t_node *tmp2, t_linkedlst **lstch);
 void				ft_remove(t_linkedlst **lstch, int nb_supp);
 void				nb_chemin(t_fourmiliere *env, t_linkedlst **lstch);
 int					nb_chemin_hant(int res, t_fourmiliere *env, t_linkedlst *lstch);
@@ -140,5 +141,7 @@ void				debutfin(t_lstant *lst_ant, t_fourmiliere *env);
 void				free_all(t_linkedlst **lstch, t_fourmiliere **env);
 void				error(t_linkedlst **lstch, t_fourmiliere **env);
 void				free_ch(t_linkedlst **lstch);
+void				del_room(t_fourmiliere **env);
+void				delonech(t_node *tmp, t_linkedlst **lst);
 
 #endif

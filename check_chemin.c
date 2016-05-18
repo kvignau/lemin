@@ -16,11 +16,7 @@ void		ft_removecrossch(t_linkedlst **lstch)
 {
 	t_node	*tmp;
 	t_node	*tmp2;
-	int		y;
-	int		j;
-	int		ok;
 
-	ok = 1;
 	tmp = (*lstch)->head;
 	while (tmp)
 	{
@@ -28,27 +24,37 @@ void		ft_removecrossch(t_linkedlst **lstch)
 			tmp2 = tmp->next;
 		else
 			return ;
-		while (tmp2)
-		{
-			j = 0;
-			while (ok == 1 && j < tmp->array.length)
-			{
-				y = 0;
-				while (ok == 1 && y < tmp2->array.length)
-				{
-					if (tmp->array.id[j] == tmp2->array.id[y])
-					{
-						ft_delone(lstch, tmp2);
-						ok = 0;
-					}
-					y++;
-				}
-				j++;
-			}
-			tmp2 = tmp2->next;
-			ok = 1;
-		}
+		rm_cross(tmp, tmp2, lstch);
 		tmp = tmp->next;
+	}
+}
+
+void		rm_cross(t_node *tmp, t_node *tmp2, t_linkedlst **lstch)
+{
+	int		j;
+	int		y;
+	int		ok;
+
+	ok = 1;
+	while (tmp2)
+	{
+		j = 0;
+		while (ok == 1 && j < tmp->array.length)
+		{
+			y = 0;
+			while (ok == 1 && y < tmp2->array.length)
+			{
+				if (tmp->array.id[j] == tmp2->array.id[y])
+				{
+					ft_delone(lstch, tmp2);
+					ok = 0;
+				}
+				y++;
+			}
+			j++;
+		}
+		tmp2 = tmp2->next;
+		ok = 1;
 	}
 }
 
@@ -57,7 +63,6 @@ void		nb_chemin(t_fourmiliere *env, t_linkedlst **lstch)
 	int		i;
 	int		end_ch;
 	int		start_ch;
-	//int		res;
 
 	i = 0;
 	start_ch = 0;

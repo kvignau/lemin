@@ -96,7 +96,6 @@ void		ft_delone(t_linkedlst **lst, t_node *delnode)
 		tmp = tmp->next;
 	if (tmp == NULL)
 		return ;
-	//a revoir
 	if (tmp == (*lst)->head)
 	{
 		(*lst)->head = tmp->next;
@@ -114,7 +113,11 @@ void		ft_delone(t_linkedlst **lst, t_node *delnode)
 		tmp->prev->next = tmp->next;
 		tmp->next->prev = tmp->prev;
 	}
-	// ft_bzero(tmp, sizeof(t_node));
+	delonech(tmp, lst);
+}
+
+void		delonech(t_node *tmp, t_linkedlst **lst)
+{
 	free(tmp->array.id);
 	free(tmp->array.dispo);
 	free(tmp);
