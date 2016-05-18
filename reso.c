@@ -26,9 +26,7 @@ void	ft_realloc(t_chemin *ch)
 int		lemin(int start, t_fourmiliere *env, t_linkedlst **lstch, t_chemin *ch)
 {
 	int			i;
-	int			ret;
 	t_node	 	*tmp;
-	int			y;
 	int			stop;
 
 	i = 0;
@@ -38,37 +36,49 @@ int		lemin(int start, t_fourmiliere *env, t_linkedlst **lstch, t_chemin *ch)
 		if (env->tubes[start][i] == 1 && env->visite[i] == 0)
 		{
 			if (i == 1)
-			{
-				if (ch->length == 0)
-				{
-					if (ch->length >= ch->length_malloc)
-					 	ft_realloc(ch);
-					ch->id[ch->length] = i;
-					ch->length = ch->length + 1;
-					stop++;
-				}
-				ft_addchfront(lstch, ch);
-				return (1);
-			}
+				return (add_good_way(lstch, ch, &stop));
 			else
 			{
-				env->tubes[start][i] = 0;
-				env->tubes[i][start] = 0;
-				env->visite[i] = 1;
-				if (ch->length >= ch->length_malloc)
-					ft_realloc(ch);
-				ch->id[ch->length] = i;
-				ch->length = ch->length + 1;
-				ret = lemin(i, env, lstch, ch);
-				if (ret == -1)
+				go_next(ch, env, i, start);
+				if (lemin(i, env, lstch, ch) == -1)
 					return (-1);
-				ch->length = ch->length - 1;
-				env->visite[i] = 0;
-				env->tubes[start][i] = 1;
-				env->tubes[i][start] = 1;
+				go_back(ch, env, i, start);
 			}
 		}
 		i++;
 	}
 	return (0);
+}
+
+void		go_back(t_chemin *ch, t_fourmiliere *env, int i, int start)
+{
+	ch->length = ch->length - 1;
+	env->visite[i] = 0;
+	env->tubes[start][i] = 1;
+	env->tubes[i][start] = 1;
+}
+
+void		go_next(t_chemin *ch, t_fourmiliere *env, int i, int start)
+{
+	env->visite[i] = 1;
+	env->tubes[start][i] = 0;
+	env->tubes[i][start] = 0;
+	if (ch->length >= ch->length_malloc)
+		ft_realloc(ch);
+	ch->id[ch->length] = i;
+	ch->length = ch->length + 1;
+}
+
+int			add_good_way(t_linkedlst **lstch, t_chemin *ch, int *stop)
+{
+	if (ch->length == 0)
+	{
+		if (ch->length >= ch->length_malloc)
+		 	ft_realloc(ch);
+		ch->id[ch->length] = 1;
+		ch->length = ch->length + 1;
+		(*stop)++;
+	}
+	ft_addch(lstch, ch);
+	return (1);
 }

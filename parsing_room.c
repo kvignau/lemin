@@ -139,33 +139,17 @@ int				ft_room(t_fourmiliere **env, char *line, int *end, int *start)
 	char		**recup;
 	t_rooms		*room;
 	int			ok;
-	t_rooms		*tmp;
 	static int	nb = 1;
 
 	if (line[0] == '#' && line[1] == '#')
 		info_room(start, end, line);
-	else if (line[0] == 'L')
-		return (0);
 	else
 	{
-		if (split_space(line) == 0)
+		if (line[0] == 'L' || split_space(line) == 0)
 			return (0);
 		recup = ft_strsplit(line, ' ');
-		if (!recup[0] || !recup[1] || !recup[2])
-		{
-			ft_deltab(recup);
-			return (0);
-		}
-		ok = test_room(line);
-		if (ok != 1)
+		if ((ok = name_room_ok(env, recup, line)) != 1)
 			return (ok);
-		tmp = HROOMS;
-		while (tmp)
-		{
-			if (ft_strequ(tmp->name_room, recup[0]))
-				return (-1);
-			tmp = tmp->next;
-		}
 		ft_newroom(&room, ft_strdup(recup[0]), ft_atoi(recup[1]), ft_atoi(recup[2]));
 		ft_addroomfront(env, room);
 		ft_deltab(recup);
@@ -175,5 +159,40 @@ int				ft_room(t_fourmiliere **env, char *line, int *end, int *start)
 	}
 	if ((*env)->rooms->head && (*start) != 1 && (*end) != 1)
 		ft_printf("%s %d %d\n", (*env)->rooms->head->name_room, (*env)->rooms->head->x, (*env)->rooms->head->y);
+	return (1);
+}
+
+int				name_room_ok(t_fourmiliere **env, char **recup, char *line)
+{
+	int			ok;
+
+	if (!recup[0] || !recup[1] || !recup[2])
+	{
+		ft_deltab(recup);
+		return (0);
+	}
+	if ((ok = room_ok(env, recup, line)) != 1)
+	{
+		ft_deltab(recup);
+		return (ok);
+	}
+	return (1);
+}
+
+int				room_ok(t_fourmiliere **env, char **recup, char *line)
+{
+	int			ok;
+	t_rooms		*tmp;
+
+	ok = test_room(line);
+	if (ok != 1)
+		return (ok);
+	tmp = HROOMS;
+	while (tmp)
+	{
+		if (ft_strequ(tmp->name_room, recup[0]))
+			return (-1);
+		tmp = tmp->next;
+	}
 	return (1);
 }

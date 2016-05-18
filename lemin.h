@@ -108,6 +108,8 @@ int					test_room(char *line);
 void				ft_initpipe(t_fourmiliere **env);
 int					split_space(char *line);
 int					ft_room(t_fourmiliere **env, char *line, int *end, int *start);
+int					name_room_ok(t_fourmiliere **env, char **recup, char *line);
+int					room_ok(t_fourmiliere **env, char **recup, char *line);
 int					parsing_fourmiliere(t_fourmiliere **env);
 int					split_minus(char *line);
 int					ft_pipe(t_fourmiliere **env, char *line);
@@ -117,7 +119,7 @@ int					test_pipe(t_fourmiliere **env, char **recup, int *id_1, int *id_2);
 //chemin
 void				initlstchemin(t_linkedlst **lstchemin);
 int					ft_newchemin(t_chemin *ch);
-void				ft_addchfront(t_linkedlst **lst, t_chemin *new_elem);
+void				ft_addch(t_linkedlst **lst, t_chemin *new_elem);
 void				ft_delone(t_linkedlst **lst, t_node *delnode);
 void				ft_removecrossch(t_linkedlst **lstch);
 void				rm_cross(t_node *tmp, t_node *tmp2, t_linkedlst **lstch);
@@ -126,6 +128,9 @@ void				nb_chemin(t_fourmiliere *env, t_linkedlst **lstch);
 int					nb_chemin_hant(int res, t_fourmiliere *env, t_linkedlst *lstch);
 
 //reso
+void				go_next(t_chemin *ch, t_fourmiliere *env, int i, int start);
+void				go_back(t_chemin *ch, t_fourmiliere *env, int i, int start);
+int					add_good_way(t_linkedlst **lstch, t_chemin *ch, int *stop);
 int					lemin(int start, t_fourmiliere *env, t_linkedlst **lstch, t_chemin *ch);
 void				ft_deltab(char **recup);
 

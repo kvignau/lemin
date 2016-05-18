@@ -35,7 +35,7 @@ int			ft_newchemin(t_chemin *ch)
 	return (1);
 }
 
-void		ft_addchfront(t_linkedlst **lst, t_chemin *array)
+void		ft_addch(t_linkedlst **lst, t_chemin *array)
 {
 	t_node	*new_elem;
 	t_node	*tmp;
