@@ -69,19 +69,36 @@ int			split_minus(char *line)
 int			ft_pipe(t_fourmiliere **env, char *line)
 {
 	char	**recup;
-	t_rooms	*tmp;
-	int		ok;
 	int		id_1;
 	int		id_2;
 
-	ok = 0;
 	if (line[0] == '#' && line[1] == '#')
 		return (1);
 	if (!split_minus(line))
 		return (0);
 	recup = ft_strsplit(line, '-');
 	if (!recup[0] || !recup[1])
+	{
+		ft_deltab(recup);
 		return (0);
+	}
+	if (test_pipe(env, recup, &id_1, &id_2) == 0)
+	{
+		ft_deltab(recup);
+		return (0);
+	}
+	(*env)->tubes[id_1][id_2] = 1;
+	(*env)->tubes[id_2][id_1] = 1;
+	ft_deltab(recup);
+	return (1);
+}
+
+int			test_pipe(t_fourmiliere **env, char **recup, int *id_1, int *id_2)
+{
+	t_rooms	*tmp;
+	int		ok;
+
+	ok = 0;
 	tmp = HROOMS;
 	while (tmp)
 	{
@@ -89,24 +106,19 @@ int			ft_pipe(t_fourmiliere **env, char *line)
 		{
 			if (ok == 0)
 			{
-				id_1 = tmp->id;
+				(*id_1) = tmp->id;
 				ft_printf("%s-", tmp->name_room);	
 			}
 			if (ok == 1)
 			{
-				id_2 = tmp->id;
+				(*id_2) = tmp->id;
 				ft_printf("%s\n", tmp->name_room);	
 			}
 			ok++;
 		}
 		tmp = tmp->next;
 	}
-	if (ok != 2)
-		return (0);
-	(*env)->tubes[id_1][id_2] = 1;
-	(*env)->tubes[id_2][id_1] = 1;
-	ft_deltab(recup);
-	return (1);
+	return ((ok != 2) ? 0 : 1);
 }
 
 void		ft_deltab(char **recup)

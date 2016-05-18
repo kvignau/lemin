@@ -109,10 +109,10 @@ void				ft_initpipe(t_fourmiliere **env);
 int					split_space(char *line);
 int					ft_room(t_fourmiliere **env, char *line, int *end, int *start);
 int					parsing_fourmiliere(t_fourmiliere **env);
-int					parsing_room_pipe(t_fourmiliere **env, char *line, int *start, int *end);
 int					split_minus(char *line);
 int					ft_pipe(t_fourmiliere **env, char *line);
 int					start_end(t_fourmiliere *env);
+int					test_pipe(t_fourmiliere **env, char **recup, int *id_1, int *id_2);
 
 //chemin
 void				initlstchemin(t_linkedlst **lstchemin);
@@ -137,6 +137,10 @@ void				create_ant(t_lstant	**lst_ant, t_fourmiliere *env);
 //move ant
 int					finish(t_lstant *lst);
 void				check_dispo(t_linkedlst *lst_ch, t_fourmiliere *env);
+void				ant_start(t_node *ch, t_ant *ant, int *first, t_fourmiliere *env);
+void				ant_move(t_node *ch, t_ant *ant, int *first, t_fourmiliere *env);
+void				move_ch(t_node *ch, t_ant *ant, int i);
+void				move_ant(t_linkedlst *lst_ch, t_ant *ant, int *first, t_fourmiliere *env);
 
 void				ajout_dispo(t_linkedlst **lstch);
 void				display(int id_ant, int id_room, t_fourmiliere *env, int first);
