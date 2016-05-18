@@ -33,6 +33,7 @@ void		error(t_linkedlst **lstch, t_fourmiliere **env)
 		if ((*env)->visite)
 			free((*env)->visite);
 	}
+	//while (1);
 	exit (0);
 }
 

@@ -91,7 +91,6 @@ void			check_dispo(t_linkedlst *lst_ch, t_fourmiliere *env)
 	{
 		debutfin(lst_ant, env);
 		remove_ant(&lst_ant);
-		//ft_printf("ALL ANT");
 		return ;
 	}
 	while (finish(lst_ant) == 0)
@@ -111,7 +110,6 @@ void			check_dispo(t_linkedlst *lst_ch, t_fourmiliere *env)
 						ch->array.dispo[0] = 0;
 						first++;
 						display(ant->id_ant, ant->id_room, env, first);
-						//ft_printf("L%d-%d ", ant->id_ant, ant->id_room);//display
 						break ;
 					}
 					ch = ch->next;
@@ -133,7 +131,6 @@ void			check_dispo(t_linkedlst *lst_ch, t_fourmiliere *env)
 								ch->array.dispo[i + 1] = 0;
 								first++;
 								display(ant->id_ant, ant->id_room, env, first);
-								//ft_printf("L%d-%d ", ant->id_ant, ant->id_room);//display
 								break ;
 							}
 							else
@@ -142,7 +139,6 @@ void			check_dispo(t_linkedlst *lst_ch, t_fourmiliere *env)
 								ch->array.dispo[i] = 1;
 								first++;
 								display(ant->id_ant, ant->id_room, env, first);
-								// ft_printf("L%d-%d ", ant->id_ant, ant->id_room);//display
 								break ;
 							}
 						}

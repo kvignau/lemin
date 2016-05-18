@@ -39,15 +39,8 @@ int			nbfourmis(char *line, t_fourmiliere **env)
 		return (0);
 	if (strlen(line) == 10)
 	{
-		i = 0;
-		while (line && line[i])
-		{
-			if (line[i] < MAXINT[i])
-				break ;
-			else if (line[i] > MAXINT[i])
-				return (0);
-			i++;
-		}
+		if (nb_ant_max_int(line) == 0)
+			return (0);
 	}
 	(*env)->nb_fourmis = ft_atoi(line);
 	if ((*env)->nb_fourmis == 0 && line[0] != '0')
@@ -56,10 +49,26 @@ int			nbfourmis(char *line, t_fourmiliere **env)
 	return (1);
 }
 
-int					test_room(char *line)
+int			nb_ant_max_int(char *line)
 {
-	int				i;
-	int				space;
+	int		i;
+
+	i = 0;
+	while (line && line[i])
+	{
+		if (line[i] < MAXINT[i])
+			break ;
+		else if (line[i] > MAXINT[i])
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int			test_room(char *line)
+{
+	int		i;
+	int		space;
 
 	i = 0;
 	space = 0;

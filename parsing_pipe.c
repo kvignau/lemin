@@ -141,8 +141,7 @@ int			parsing_fourmiliere(t_fourmiliere **env)
 			if ((*env)->nb_fourmis < 0)
 			{
 				if (!nbfourmis(line, env))
-					return (0);
-				//ft_printf("%d\n", (*env)->nb_fourmis);//debug
+					return (error_parsing(line));
 			}
 			else
 			{
@@ -152,18 +151,12 @@ int			parsing_fourmiliere(t_fourmiliere **env)
 					if (roomok == 0)
 						ok++;
 					if (roomok == -1)
-					{
-						free(line);
-						return (0);
-					}
+						return (error_parsing(line));
 				}
 				if (ok == 1)
 				{
 					if (!start_end(*env))
-					{
-						free(line);
-						return (0);
-					}
+						return (error_parsing(line));
 					ft_initpipe(env);
 				}
 				if (ok >= 1)
@@ -173,7 +166,6 @@ int			parsing_fourmiliere(t_fourmiliere **env)
 						free(line);
 						break ;
 					}
-						//return (0);
 					ok++;
 				}
 			}
@@ -181,4 +173,10 @@ int			parsing_fourmiliere(t_fourmiliere **env)
 		free(line);
 	}
 	return (1);
+}
+
+int			error_parsing(char *line)
+{
+	free(line);
+	return (0);
 }
