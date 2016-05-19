@@ -81,9 +81,7 @@ int			ft_pipe(t_fourmiliere **env, char *line)
 	int		id_2;
 
 	if (line[0] == '#' && line[1] == '#')
-	{
 		return (display_hashtag(line));
-	}
 	if (!split_minus(line))
 		return (0);
 	recup = ft_strsplit(line, '-');
