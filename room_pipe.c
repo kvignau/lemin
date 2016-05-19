@@ -37,6 +37,8 @@ int			room_ok(t_fourmiliere **env, char **recup, char *line)
 	ok = test_room(line);
 	if (ok != 1)
 		return (ok);
+	if (ft_strchr(recup[0], '-') != NULL)
+		return (-1);
 	tmp = HROOMS;
 	while (tmp)
 	{
