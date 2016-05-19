@@ -50,9 +50,9 @@ int				parsing_choise(t_fourmiliere **env, char *line, int *start,
 	{
 		ok = parsing_room_pipe(env, line, start, end);
 		if (ok == 0)
-			return (error_parsing(line, 0));
+			return (0);
 		else if (ok == -1)
-			return (error_parsing(line, -1));
+			return (-1);
 	}
 	return (1);
 }
@@ -81,7 +81,7 @@ int				parsing_room_pipe(t_fourmiliere **env, char *line, int *start,
 	if (ok >= 1)
 	{
 		if (ft_pipe(env, line) == 0)
-			return (-1);
+			return (error_parsing(line, -1));
 		ok++;
 	}
 	return (1);

@@ -40,7 +40,8 @@ int			room_ok(t_fourmiliere **env, char **recup, char *line)
 	tmp = HROOMS;
 	while (tmp)
 	{
-		if (ft_strequ(tmp->name_room, recup[0]))
+		if (ft_strequ(tmp->name_room, recup[0]) ||
+			(tmp->x == ft_atoi(recup[1]) && (tmp->y == ft_atoi(recup[2]))))
 			return (-1);
 		tmp = tmp->next;
 	}

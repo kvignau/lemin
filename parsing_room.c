@@ -23,6 +23,8 @@ int				test_room(char *line)
 	{
 		if (line[i] == ' ')
 			space++;
+		else if (line[i] == '+')
+			space++;
 		else if (space != 0 && !ft_isdigit(line[i]))
 			return (-1);
 		i++;
