@@ -17,7 +17,7 @@ void		error(t_linkedlst **lstch, t_fourmiliere **env)
 	int		i;
 
 	i = 0;
-	ft_putstr("Error\n");
+	ft_putstr("ERROR\n");
 	free_ch(lstch);
 	if ((*env)->rooms->head != NULL)
 	{
