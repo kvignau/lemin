@@ -53,7 +53,7 @@ void			debutfin(t_lstant *lst_ant, t_fourmiliere *env)
 	ant = lst_ant->head;
 	while (ant)
 	{
-		display(ant->id_ant, ant->id_room, env, first);
+		display(ant->id_ant, 1, env, first);
 		first++;
 		ant = ant->next;
 	}
@@ -66,7 +66,7 @@ void			remove_ant(t_lstant **lstant)
 
 	ant = NULL;
 	if ((*lstant)->head->next)
-		ant = (*lstant)->head->next;
+		ant = (*lstant)->head->next;	
 	while (ant != NULL)
 	{
 		free(ant->prev);
@@ -91,7 +91,7 @@ void			check_dispo(t_linkedlst *lst_ch, t_fourmiliere *env)
 		debutfin(lst_ant, env);
 		remove_ant(&lst_ant);
 		return ;
-	}
+	}	
 	while (finish(lst_ant) == 0)
 	{
 		first = 0;

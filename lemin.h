@@ -100,7 +100,7 @@ int					error_parsing(char *line);
 
 //fonction lemin.c
 int					iscomment(char *line);
-void				info_room(int *start, int *end, char *line);
+int					info_room(int *start, int *end, char *line);
 void				id_room(int start, int end, int *nb, t_fourmiliere **env);
 int					nbfourmis(char *line, t_fourmiliere **env);
 int					nb_ant_max_int(char *line);
@@ -111,6 +111,7 @@ int					ft_room(t_fourmiliere **env, char *line, int *end, int *start);
 int					name_room_ok(t_fourmiliere **env, char **recup, char *line);
 int					room_ok(t_fourmiliere **env, char **recup, char *line);
 int					parsing_fourmiliere(t_fourmiliere **env);
+int					parsing_room_pipe(t_fourmiliere **env, char *line, int *start, int *end);
 int					split_minus(char *line);
 int					ft_pipe(t_fourmiliere **env, char *line);
 int					start_end(t_fourmiliere *env);

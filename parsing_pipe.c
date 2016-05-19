@@ -66,6 +66,14 @@ int			split_minus(char *line)
 	return (1);
 }
 
+int			display_hashtag(char *line)
+{
+	if (ft_strequ(line + 2, "start") || ft_strequ(line + 2, "end"))
+		return (0);
+	ft_printf("%s\n", line);
+	return (1);
+}
+
 int			ft_pipe(t_fourmiliere **env, char *line)
 {
 	char	**recup;
@@ -73,7 +81,9 @@ int			ft_pipe(t_fourmiliere **env, char *line)
 	int		id_2;
 
 	if (line[0] == '#' && line[1] == '#')
-		return (1);
+	{
+		return (display_hashtag(line));
+	}
 	if (!split_minus(line))
 		return (0);
 	recup = ft_strsplit(line, '-');
@@ -139,13 +149,10 @@ int			parsing_fourmiliere(t_fourmiliere **env)
 	char	*line;
 	int		end;
 	int		start;
-	int		roomok;
 	int		ok;
 
 	end = 0;
 	start = 0;
-	roomok = 1;
-	ok = 0;
 	while (get_next_line(0, &line))
 	{
 		if (!iscomment(line))
@@ -157,32 +164,46 @@ int			parsing_fourmiliere(t_fourmiliere **env)
 			}
 			else
 			{
+				ok = parsing_room_pipe(env, line, &start, &end);
 				if (ok == 0)
+					return (0);
+				else if (ok == -1)
 				{
-					roomok = ft_room(env, line, &end, &start);
-					if (roomok == 0)
-						ok++;
-					if (roomok == -1)
-						return (error_parsing(line));
-				}
-				if (ok == 1)
-				{
-					if (!start_end(*env))
-						return (error_parsing(line));
-					ft_initpipe(env);
-				}
-				if (ok >= 1)
-				{
-					if (!ft_pipe(env, line))
-					{
-						free(line);
-						break ;
-					}
-					ok++;
+					free(line);
+					break ;
 				}
 			}
 		}
 		free(line);
+	}
+	return (1);
+}
+
+int			parsing_room_pipe(t_fourmiliere **env, char *line, int *start, int *end)
+{
+	int		static ok = 0;
+	int		roomok;
+
+	roomok = 1;
+	if (ok == 0)
+	{
+		roomok = ft_room(env, line, end, start);
+		if (roomok == 0)
+			ok++;
+		if (roomok == -1)
+			return (error_parsing(line));
+	}
+	if (ok == 1)
+	{
+		if (!start_end(*env))
+			return (error_parsing(line));
+		ft_initpipe(env);
+	}
+	if (ok >= 1)
+	{
+		if (ft_pipe(env, line) == 0)
+			return (-1);
+		ok++;
 	}
 	return (1);
 }

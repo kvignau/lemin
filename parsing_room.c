@@ -16,7 +16,7 @@ int			iscomment(char *line)
 {
 	if (line[0] == '#' && line[1] != '#')
 	{
-		ft_printf("%s\n", line);//afficher commentaires
+		ft_printf("%s\n", line);
 		return (1);
 	}
 	return (0);
@@ -43,7 +43,7 @@ int			nbfourmis(char *line, t_fourmiliere **env)
 			return (0);
 	}
 	(*env)->nb_fourmis = ft_atoi(line);
-	if ((*env)->nb_fourmis == 0 && line[0] != '0')
+	if ((*env)->nb_fourmis == 0)
 		return (0);
 	ft_printf("%d\n", (*env)->nb_fourmis);
 	return (1);
@@ -101,19 +101,14 @@ int			split_space(char *line)
 	return (1);
 }
 
-void			info_room(int *start, int *end, char *line)
+int				info_room(int *start, int *end, char *line)
 {
 	if (ft_strequ("start", line + 2))
-	{
 		(*start)++;
-		ft_printf("%s\n", line);
-	}
 	else if (ft_strequ("end", line + 2))
-	{
 		(*end)++;
-		ft_printf("%s\n", line);
-	}
-	// ft_printf("%s\n", line); // affiche les ligne ## a ignorer ???
+	ft_printf("%s\n", line); // affiche les ligne ## a ignorer ???
+	return (1);
 }
 
 void			id_room(int start, int end, int *nb, t_fourmiliere **env)
@@ -142,7 +137,7 @@ int				ft_room(t_fourmiliere **env, char *line, int *end, int *start)
 	static int	nb = 1;
 
 	if (line[0] == '#' && line[1] == '#')
-		info_room(start, end, line);
+		return (info_room(start, end, line));
 	else
 	{
 		if (line[0] == 'L' || split_space(line) == 0)
