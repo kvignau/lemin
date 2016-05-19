@@ -6,7 +6,7 @@
 /*   By: kvignau <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 16:15:33 by kvignau           #+#    #+#             */
-/*   Updated: 2016/04/13 16:15:48 by kvignau          ###   ########.fr       */
+/*   Updated: 2016/05/19 15:17:24 by kvignau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void		initenv(t_fourmiliere **env)
 	(*env)->nb_fourmis = -1;
 	(*env)->visite = NULL;
 	(*env)->tubes = NULL;
-
 }
 
 void		ft_newroom(t_rooms **room, char *name, int x, int y)

@@ -96,7 +96,7 @@ void				initenv(t_fourmiliere **env);
 void				ft_newroom(t_rooms **room, char *name, int x, int y);
 void				ft_addroomfront(t_fourmiliere **env, t_rooms *new_elem);
 void				ft_delrooms(t_fourmiliere **env);
-int					error_parsing(char *line);
+int					error_parsing(char *line, int ret);
 
 //fonction lemin.c
 int					iscomment(char *line);
@@ -112,6 +112,7 @@ int					name_room_ok(t_fourmiliere **env, char **recup, char *line);
 int					room_ok(t_fourmiliere **env, char **recup, char *line);
 int					parsing_fourmiliere(t_fourmiliere **env);
 int					parsing_room_pipe(t_fourmiliere **env, char *line, int *start, int *end);
+int					parsing_choise(t_fourmiliere **env, char *line, int *start, int *end);
 int					split_minus(char *line);
 int					ft_pipe(t_fourmiliere **env, char *line);
 int					start_end(t_fourmiliere *env);
@@ -121,6 +122,8 @@ int					test_pipe(t_fourmiliere **env, char **recup, int *id_1, int *id_2);
 void				initlstchemin(t_linkedlst **lstchemin);
 int					ft_newchemin(t_chemin *ch);
 void				ft_addch(t_linkedlst **lst, t_chemin *new_elem);
+void				action_add(t_linkedlst **lst, t_node *tmp, t_node *new_elem, t_chemin *array);
+void				first_ch(t_linkedlst **lst, t_node *new_elem);
 void				ft_delone(t_linkedlst **lst, t_node *delnode);
 void				ft_removecrossch(t_linkedlst **lstch);
 void				rm_cross(t_node *tmp, t_node *tmp2, t_linkedlst **lstch);

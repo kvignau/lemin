@@ -6,69 +6,16 @@
 /*   By: kvignau <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/10 17:40:56 by kvignau           #+#    #+#             */
-/*   Updated: 2016/05/10 17:41:05 by kvignau          ###   ########.fr       */
+/*   Updated: 2016/05/19 15:11:10 by kvignau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-int			iscomment(char *line)
+int				test_room(char *line)
 {
-	if (line[0] == '#' && line[1] != '#')
-	{
-		ft_printf("%s\n", line);
-		return (1);
-	}
-	return (0);
-}
-
-int			nbfourmis(char *line, t_fourmiliere **env)
-{
-	int		i;
-
-	i = 0;
-	if (line && line[0] == '+')
-		i++;
-	while (line && line[i])
-	{
-		if (!ft_isdigit(line[i]))
-			return (0);
-		i++;
-	}
-	if (strlen(line) > 10)
-		return (0);
-	if (strlen(line) == 10)
-	{
-		if (nb_ant_max_int(line) == 0)
-			return (0);
-	}
-	(*env)->nb_fourmis = ft_atoi(line);
-	if ((*env)->nb_fourmis == 0)
-		return (0);
-	ft_printf("%d\n", (*env)->nb_fourmis);
-	return (1);
-}
-
-int			nb_ant_max_int(char *line)
-{
-	int		i;
-
-	i = 0;
-	while (line && line[i])
-	{
-		if (line[i] < MAXINT[i])
-			break ;
-		else if (line[i] > MAXINT[i])
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-int			test_room(char *line)
-{
-	int		i;
-	int		space;
+	int			i;
+	int			space;
 
 	i = 0;
 	space = 0;
@@ -76,17 +23,17 @@ int			test_room(char *line)
 	{
 		if (line[i] == ' ')
 			space++;
-		else if (space != 0 && !ft_isdigit(line[i]))			
+		else if (space != 0 && !ft_isdigit(line[i]))
 			return (-1);
 		i++;
 	}
 	return (1);
 }
 
-int			split_space(char *line)
+int				split_space(char *line)
 {
-	int		i;
-	int		space;
+	int			i;
+	int			space;
 
 	i = 0;
 	space = 0;
@@ -107,7 +54,7 @@ int				info_room(int *start, int *end, char *line)
 		(*start)++;
 	else if (ft_strequ("end", line + 2))
 		(*end)++;
-	ft_printf("%s\n", line); // affiche les ligne ## a ignorer ???
+	ft_printf("%s\n", line);
 	return (1);
 }
 
@@ -145,7 +92,8 @@ int				ft_room(t_fourmiliere **env, char *line, int *end, int *start)
 		recup = ft_strsplit(line, ' ');
 		if ((ok = name_room_ok(env, recup, line)) != 1)
 			return (ok);
-		ft_newroom(&room, ft_strdup(recup[0]), ft_atoi(recup[1]), ft_atoi(recup[2]));
+		ft_newroom(&room, ft_strdup(recup[0]), ft_atoi(recup[1]),
+				ft_atoi(recup[2]));
 		ft_addroomfront(env, room);
 		ft_deltab(recup);
 		id_room(*start, *end, &nb, env);
@@ -153,41 +101,6 @@ int				ft_room(t_fourmiliere **env, char *line, int *end, int *start)
 		*end = 0;
 	}
 	if ((*env)->rooms->head && (*start) != 1 && (*end) != 1)
-		ft_printf("%s %d %d\n", (*env)->rooms->head->name_room, (*env)->rooms->head->x, (*env)->rooms->head->y);
-	return (1);
-}
-
-int				name_room_ok(t_fourmiliere **env, char **recup, char *line)
-{
-	int			ok;
-
-	if (!recup[0] || !recup[1] || !recup[2])
-	{
-		ft_deltab(recup);
-		return (0);
-	}
-	if ((ok = room_ok(env, recup, line)) != 1)
-	{
-		ft_deltab(recup);
-		return (ok);
-	}
-	return (1);
-}
-
-int				room_ok(t_fourmiliere **env, char **recup, char *line)
-{
-	int			ok;
-	t_rooms		*tmp;
-
-	ok = test_room(line);
-	if (ok != 1)
-		return (ok);
-	tmp = HROOMS;
-	while (tmp)
-	{
-		if (ft_strequ(tmp->name_room, recup[0]))
-			return (-1);
-		tmp = tmp->next;
-	}
+		ft_printf("%s %d %d\n", HROOMS->name_room, HROOMS->x, HROOMS->y);
 	return (1);
 }

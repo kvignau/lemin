@@ -6,7 +6,7 @@
 /*   By: kvignau <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/10 17:36:29 by kvignau           #+#    #+#             */
-/*   Updated: 2016/05/10 17:36:42 by kvignau          ###   ########.fr       */
+/*   Updated: 2016/05/19 15:22:07 by kvignau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,8 @@ void		nb_chemin(t_fourmiliere *env, t_linkedlst **lstch)
 			end_ch++;
 		i++;
 	}
-	ft_remove(lstch, nb_chemin_hant(((start_ch < end_ch) ? start_ch : end_ch), env, *lstch));
+	ft_remove(lstch, nb_chemin_hant(((start_ch < end_ch) ? start_ch : end_ch),
+				env, *lstch));
 }
 
 int			nb_chemin_hant(int res, t_fourmiliere *env, t_linkedlst *lstch)

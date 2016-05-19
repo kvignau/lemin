@@ -6,7 +6,7 @@
 /*   By: kvignau <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/10 19:12:07 by kvignau           #+#    #+#             */
-/*   Updated: 2016/05/10 19:12:09 by kvignau          ###   ########.fr       */
+/*   Updated: 2016/05/19 15:18:25 by kvignau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ void		ft_newant(t_ant **ant, int id_ant)
 	(*ant)->next = NULL;
 }
 
-void			create_ant(t_lstant	**lst_ant, t_fourmiliere *env)
+void		create_ant(t_lstant **lst_ant, t_fourmiliere *env)
 {
-	t_ant		*ant;
+	t_ant	*ant;
 
 	initlstant(lst_ant);
 	while ((*lst_ant)->len < env->nb_fourmis)
@@ -63,7 +63,7 @@ void			create_ant(t_lstant	**lst_ant, t_fourmiliere *env)
 	}
 }
 
-void		ft_remove_ant(t_lstant **lstant, t_ant	*ant)
+void		ft_remove_ant(t_lstant **lstant, t_ant *ant)
 {
 	t_ant	*tmp;
 

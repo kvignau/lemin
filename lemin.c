@@ -6,7 +6,7 @@
 /*   By: kvignau <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 13:37:07 by kvignau           #+#    #+#             */
-/*   Updated: 2016/04/12 13:37:13 by kvignau          ###   ########.fr       */
+/*   Updated: 2016/05/19 15:16:43 by kvignau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void		error(t_linkedlst **lstch, t_fourmiliere **env)
 		if ((*env)->visite)
 			free((*env)->visite);
 	}
-	while (1);
+	//while (1);
 	exit (0);
 }
 
@@ -78,36 +78,6 @@ void		free_ch(t_linkedlst **lstch)
 	(*lstch)->tail = NULL;
 	free(*lstch);
 }
-
-// void		free_all(t_linkedlst **lstch, t_fourmiliere **env)
-// {
-// 	t_rooms	*rooms;
-// 	int		i;
-
-// 	i = 0;
-// 	free_ch(lstch);
-// 	if ((*env)->rooms->head != NULL)
-// 	{
-// 		if ((*env)->rooms->head->next)
-// 			rooms = (*env)->rooms->head->next;
-// 		while (i < (*env)->rooms->nb_rooms)
-// 		{
-// 			free((*env)->tubes[i]);
-// 			i++;
-// 		}
-// 		while (rooms != NULL)
-// 		{
-// 			free(rooms->prev->name_room);
-// 			free(rooms->prev);
-// 			rooms = rooms->next;
-// 		}
-// 		free((*env)->rooms->tail->name_room);
-// 		free((*env)->rooms->tail);
-// 		(*env)->rooms->head = NULL;
-// 		(*env)->rooms->tail = NULL;
-// 		free((*env)->visite);
-// 	}
-// }
 
 void		free_all(t_linkedlst **lstch, t_fourmiliere **env)
 {

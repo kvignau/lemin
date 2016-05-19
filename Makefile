@@ -15,7 +15,8 @@ NAME = lem_in
 FLAGS = -Wall -Wextra -Werror
 
 SRC = lemin.c action_lst.c reso.c lstchemin.c check_chemin.c parsing_pipe.c
-SRC += parsing_room.c ant.c move_ant.c
+SRC += parsing_room.c ant.c move_ant.c parsing.c lstchemin_del.c parsing_ant.c
+SRC += room_pipe.c test_display_ant.c
 
 OBJ = $(SRC:%.c=%.o)
 
