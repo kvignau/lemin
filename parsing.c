@@ -31,6 +31,7 @@ int				parsing_fourmiliere(t_fourmiliere **env)
 			else if (ok == -1)
 				return (1);
 		}
+		ft_putendl(line);
 		free(line);
 	}
 	return (1);

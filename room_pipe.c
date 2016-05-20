@@ -63,15 +63,9 @@ int			test_pipe(t_fourmiliere **env, char **recup, int *id_1, int *id_2)
 				ft_strequ(tmp->name_room, recup[1]))
 		{
 			if (ok == 0)
-			{
 				(*id_1) = tmp->id;
-				ft_printf("%s-", tmp->name_room);
-			}
 			if (ok == 1)
-			{
 				(*id_2) = tmp->id;
-				ft_printf("%s\n", tmp->name_room);
-			}
 			ok++;
 		}
 		tmp = tmp->next;

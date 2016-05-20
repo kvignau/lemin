@@ -15,10 +15,7 @@
 int			iscomment(char *line)
 {
 	if (line[0] == '#' && line[1] != '#')
-	{
-		ft_printf("%s\n", line);
 		return (1);
-	}
 	return (0);
 }
 
@@ -35,9 +32,9 @@ int			nbfourmis(char *line, t_fourmiliere **env)
 			return (0);
 		i++;
 	}
-	if (strlen(line) > 10)
+	if (ft_strlen(line) > 10)
 		return (0);
-	if (strlen(line) == 10)
+	if (ft_strlen(line) == 10)
 	{
 		if (nb_ant_max_int(line) == 0)
 			return (0);
@@ -45,7 +42,6 @@ int			nbfourmis(char *line, t_fourmiliere **env)
 	(*env)->nb_fourmis = ft_atoi(line);
 	if ((*env)->nb_fourmis == 0)
 		return (0);
-	ft_printf("%d\n", (*env)->nb_fourmis);
 	return (1);
 }
 

@@ -56,7 +56,6 @@ int				info_room(int *start, int *end, char *line)
 		(*start)++;
 	else if (ft_strequ("end", line + 2))
 		(*end)++;
-	ft_printf("%s\n", line);
 	return (1);
 }
 
@@ -102,7 +101,5 @@ int				ft_room(t_fourmiliere **env, char *line, int *end, int *start)
 		*start = 0;
 		*end = 0;
 	}
-	if ((*env)->rooms->head && (*start) != 1 && (*end) != 1)
-		ft_printf("%s %d %d\n", HROOMS->name_room, HROOMS->x, HROOMS->y);
 	return (1);
 }
