@@ -6,7 +6,7 @@
 /*   By: kvignau <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/10 17:38:55 by kvignau           #+#    #+#             */
-/*   Updated: 2016/05/19 15:14:33 by kvignau          ###   ########.fr       */
+/*   Updated: 2016/05/23 09:42:09 by kvignau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ int			display_hashtag(char *line)
 {
 	if (ft_strequ(line + 2, "start") || ft_strequ(line + 2, "end"))
 		return (0);
-	ft_printf("%s\n", line);
 	return (1);
 }
 
