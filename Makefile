@@ -6,7 +6,7 @@
 #    By: kvignau <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/01/04 10:52:32 by kvignau           #+#    #+#              #
-#    Updated: 2016/03/23 20:03:43 by kvignau          ###   ########.fr        #
+#    Updated: 2016/05/24 11:32:00 by kvignau          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	make -C ft_printf/ all
-	gcc -o $(NAME) $(OBJ) -L ft_printf/ -lftprintf
+	gcc $(FLAGS) -o $(NAME) $(OBJ) -L ft_printf/ -lftprintf
 
 clean:
 	make -C ft_printf/ clean
