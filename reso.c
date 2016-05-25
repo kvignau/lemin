@@ -34,6 +34,8 @@ int				lemin(int start, t_fourmiliere *env, t_linkedlst **lstch,
 	stop = 0;
 	while (stop == 0 && i < env->rooms->nb_rooms)
 	{
+		if (env->tubes == NULL)
+			return (-1);
 		if (env->tubes[start][i] == 1 && env->visite[i] == 0)
 		{
 			if (i == 1)
