@@ -21,7 +21,7 @@ int				parsing_fourmiliere(t_fourmiliere **env)
 
 	end = 0;
 	start = 0;
-	while (get_next_line(0, &line))
+	while (get_next_line(0, &line) > 0)
 	{
 		if (!iscomment(line))
 		{
